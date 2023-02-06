@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+
+<body>
+    <header class="header">
+        <h1>Portfolio</h1>
+
+        <nav class="navbar">
+            <ul class="navbar-list">
+                <li><a class='navbar-link' href="#hero">Home</a></li>
+                <li><a class='navbar-link' href="#about">About</a></li>
+                <li><a class='navbar-link' href="#skills">Skills</a></li>
+                <li><a class='navbar-link' href="#projects">Projects</a></li>
+                <li><a class='navbar-link' href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-navbar-btn">
+            <ion-icon class="mobile-nav-icon" name="menu-outline"></ion-icon><ion-icon class="mobile-nav-icon"
+                name="close-outline"></ion-icon>
+
+        </div>
+
+    </header>
+    <main>
+        <!-- HEAD SECTION  -->
+        <div class="head">
+            <section class="section-hero">
+                <div class="hero" id="hero" data-aos="fade-left">
+                    <img src="img/photo.png" alt="snehasis-ghosh">
+                </div>
+                <div class="info" data-aos="fade-right">
+
+                    <h1>Snehasis Ghosh</h1>
+                    <p>Web Developer, App Developer, UI/UX Designer</p>
+                    <a href="https://github.com/Snehasis4321" target="_blank">
+                        <div class="socials">
+                            <div class="github">
+                                <i class="fa-brands fa-github fa-2x"></i>
+                                <h3>Github</h3>
+                            </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/snehasis-ghosh-82756a1b4" target="_blank">
+                        <div class="linkedin">
+                            <i class="fa-brands fa-linkedin fa-2x"></i>
+                            <h3>LinkedIn</h3>
+                        </div>
+                    </a>
+                </div>
+
+        </div>
+        </section>
+        </div>
+        <!-- ABOUT SECTION  -->
+        <div class="about" id="about">
+            <h1 data-aos="fade-left">About</h1>
+            <div class="space"></div>
+            <h3 data-aos="fade-in">Hi I’m Snehasis Ghosh a coding enthusiast and undergraduate IT student . I am eager
+                to take on new
+                challenges and gain hands-on experience through freelancing opportunities. I am excited to apply my
+                skills and knowledge to real-world projects and continue to grow as a professional.</h3>
+        </div>
+        <!-- SKILLS SECTION  -->
+        <div class="skill-section" id="skills">
+            <h1 data-aos="fade-left">Skills</h1>
+            <div class="space"></div>
+            <div class="skills-container">
+            </div>
+            <div class="more-skills">View More </div>
+        </div>
+        <!-- PROJECTS SECTION  -->
+        <div class="projects-section" id="projects">
+            <h1 data-aos="fade-right">Projects</h1>
+            <div class="space"></div>
+
+            <div class="all-projects">
+            </div>
+        </div>
+        <!-- CONTACT SECTION  -->
+        <div class="contact-section">
+            <h1 data-aos="fade-down">Contact</h1>
+            <div class="space"></div>
+            <div class="contact" id="contact" data-aos="fade-down">
+                <form action="https://formsubmit.co/053a14a9e4bd99724b5275722e215d4e" method="POST">
+                    <input type="text" name="name" id="name" placeholder="Name : " required><br>
+                    <input type="email" name="email" id="email" placeholder="Email : " required><br>
+                    <textarea name="message" id="message" rows="8" placeholder="Message : " rows="8" cols="4"
+                        required></textarea><br>
+                    <button type="submit" class="submit-btn">Submit</button>
+
+                </form>
+            </div>
+
+    </main>
+
+    <!-- FOOTER SECTION  -->
+
+    <div class="footer">
+        <h3>Made with ❤️ by Snehasis </h3>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="app.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 200, // offset (in px) from the original trigger point
+            delay: 0, // values from 0 to 3000, with step 50ms
+            duration: 900, // values from 0 to 3000, with step 50ms
+            easing: 'ease', // default easing for AOS animations
+        });
+    </script>
+</body>
+
+</html>
