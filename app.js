@@ -27,7 +27,8 @@ let extraSkills = {
   Flutter: 90,
   Firebase: 80,
   Java: 80,
-  Vue: 80,
+  React: 80,
+  NextJs: 80,
   AWS: 80,
   "AI / ML": 80,
 };
