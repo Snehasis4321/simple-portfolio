@@ -115,7 +115,7 @@ body {
 }
 
 .github,
-.linkedin {
+.youtube {
   font-size: 1.8rem;
   /* background-color: rebeccapurple; */
   display: flex;
@@ -127,7 +127,7 @@ body {
 }
 
 .github:hover,
-.linkedin:hover {
+.youtube:hover {
   padding: 8px;
   color: white;
   background-color: #5361ff;
@@ -156,12 +156,17 @@ body {
   /* height: 60vh; */
 }
 .about h1,
-.skill-section h1,
-.contact-section h1 {
+.skill-section h1 {
   font-size: 4rem;
   font-weight: 700;
   letter-spacing: 1.5px;
-  margin-bottom: 1.6rem;
+}
+
+.contact-section h1 {
+  margin-left: 4px;
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
 }
 .space {
   height: 30px;
@@ -391,6 +396,7 @@ body {
 }
 .contact-section {
   padding: 5%;
+  /* background-color: red; */
 }
 input[type="text"],
 input[type="email"],
@@ -418,7 +424,6 @@ textarea[name="message"]:focus {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 2rem;
 }
 .submit-btn {
   margin: 1rem;
