@@ -6,7 +6,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Snehasis Ghosh - Web Developer & App Developer Portfolio</title>
+    <meta name="description" content="Portfolio of Snehasis Ghosh - Full Stack Web Developer, Mobile App Developer, and UI/UX Designer from India. Specializing in JavaScript, Python, Flutter, and modern web technologies.">
+    <meta name="keywords" content="web developer, app developer, full stack developer, JavaScript, Python, Flutter, UI/UX designer, portfolio">
+    <meta name="author" content="Snehasis Ghosh">
+    <meta property="og:title" content="Snehasis Ghosh - Developer Portfolio">
+    <meta property="og:description" content="Full Stack Web Developer & App Developer Portfolio">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/96995340">
+    <meta property="og:url" content="#">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -39,12 +47,12 @@
         <div class="head">
             <section class="section-hero">
                 <div class="hero" id="hero" data-aos="fade-left">
-                    <img src="https://avatars.githubusercontent.com/u/96995340" alt="snehasis-ghosh">
+                    <img src="https://avatars.githubusercontent.com/u/96995340" alt="Snehasis Ghosh - Web Developer and App Developer" loading="lazy">
                 </div>
                 <div class="info" data-aos="fade-right">
-
                     <h1>Snehasis Ghosh</h1>
-                    <p>Web Developer, App Developer, UI/UX Designer</p>
+                    <p class="tagline">Full Stack Web Developer, Mobile App Developer & UI/UX Designer</p>
+                    <p class="intro">Passionate about creating innovative digital solutions and helping beginners learn through online tutorials.</p>
                     <a href="https://github.com/Snehasis4321" target="_blank">
                         <div class="socials">
                             <div class="github">
@@ -67,7 +75,7 @@
         <div class="about" id="about">
             <h1 data-aos="fade-left">About</h1>
             <div class="space"></div>
-            <h3 data-aos="fade-in">Hi I'm Snehasis Ghosh, a freelance web developer and app developer from India. Currently i make online tutorials for beginners. And work on some part time project, sadly i dont do any full time jobs.</h3>
+            <p data-aos="fade-in" class="about-text">Hi, I'm Snehasis Ghosh, a passionate freelance web developer and mobile app developer from India. I specialize in creating modern, responsive web applications and mobile apps using cutting-edge technologies. Currently, I create educational content through online tutorials to help beginners start their programming journey. I work on exciting part-time projects and am always open to new opportunities and collaborations.</p>
         </div>
         <!-- SKILLS SECTION  -->
         <div class="skill-section" id="skills">
@@ -90,13 +98,30 @@
             <h1 data-aos="fade-down">Contact</h1>
             <!-- <div class="space"></div> -->
             <div class="contact" id="contact" data-aos="fade-down">
-                <form action="https://formsubmit.co/053a14a9e4bd99724b5275722e215d4e" method="POST">
-                    <input type="text" name="name" id="name" placeholder="Name : " required><br>
-                    <input type="email" name="email" id="email" placeholder="Email : " required><br>
-                    <textarea name="message" id="message" rows="8" placeholder="Message : " rows="8" cols="4"
-                        required></textarea><br>
-                    <button type="submit" class="submit-btn">Submit</button>
-
+                <form action="https://formsubmit.co/053a14a9e4bd99724b5275722e215d4e" method="POST" class="contact-form">
+                    <input type="hidden" name="_subject" value="New Portfolio Contact">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="#contact">
+                    
+                    <div class="form-group">
+                        <label for="name" class="sr-only">Name</label>
+                        <input type="text" name="name" id="name" placeholder="Your Name" required aria-label="Your Name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="sr-only">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Your Email" required aria-label="Your Email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="sr-only">Message</label>
+                        <textarea name="message" id="message" rows="8" placeholder="Your Message" required aria-label="Your Message"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading" style="display: none;">Sending...</span>
+                    </button>
                 </form>
             </div>
 
