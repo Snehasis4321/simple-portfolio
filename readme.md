@@ -13,4 +13,4 @@
 
 ### Website Live
 
-### [Link](https://snehasis4321.github.io/Simple-Portfolio/)
+### [Link](https://snehasisghosh.com)
