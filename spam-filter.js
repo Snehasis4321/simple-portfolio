@@ -40,6 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.querySelector(".contact-form");
   const emailInput = document.querySelector("#email");
 
+  // Check for success message in URL for real users
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('success') === 'true') {
+    alert("Thank you! Your message has been sent successfully. I'll get back to you soon!");
+    // Clean URL
+    window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+  }
+
   if (contactForm && emailInput) {
     contactForm.addEventListener("submit", function (e) {
       const emailValue = emailInput.value;
@@ -67,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return false;
       }
+      // If not spam, let the form submit normally to FormSubmit
     });
   }
 });
