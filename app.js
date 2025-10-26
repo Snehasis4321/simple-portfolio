@@ -1,3 +1,110 @@
+// Theme toggle functionality
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+const root = document.documentElement;
+
+// Load theme from localStorage
+const loadTheme = () => {
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  root.setAttribute('data-theme', savedTheme);
+  updateThemeIcon(savedTheme);
+};
+
+// Update theme icon
+const updateThemeIcon = (theme) => {
+  if (theme === 'dark') {
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+    themeToggle.setAttribute('aria-label', 'Switch to light mode');
+  } else {
+    themeIcon.classList.remove('fa-sun');
+    themeIcon.classList.add('fa-moon');
+    themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+  }
+};
+
+// Toggle theme
+themeToggle?.addEventListener('click', () => {
+  const currentTheme = root.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+  root.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateThemeIcon(newTheme);
+});
+
+// Initialize theme on page load
+loadTheme();
+
+// Typing Animation Effect
+const typingText = document.getElementById('typing-text');
+const roles = [
+  'Full Stack Web Developer',
+  'Mobile App Developer',
+  'UI/UX Designer',
+  'Content Creator'
+];
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100;
+
+const typeRole = () => {
+  const currentRole = roles[roleIndex];
+
+  if (isDeleting) {
+    typingText.textContent = currentRole.substring(0, charIndex - 1);
+    charIndex--;
+    typingSpeed = 50;
+  } else {
+    typingText.textContent = currentRole.substring(0, charIndex + 1);
+    charIndex++;
+    typingSpeed = 100;
+  }
+
+  if (!isDeleting && charIndex === currentRole.length) {
+    // Pause at end of word
+    typingSpeed = 2000;
+    isDeleting = true;
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    roleIndex = (roleIndex + 1) % roles.length;
+    typingSpeed = 500;
+  }
+
+  setTimeout(typeRole, typingSpeed);
+};
+
+// Start typing animation after a short delay
+setTimeout(typeRole, 1000);
+
+// Scroll Progress Indicator
+const scrollProgress = document.getElementById('scroll-progress');
+
+window.addEventListener('scroll', () => {
+  const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (window.scrollY / windowHeight) * 100;
+  scrollProgress.style.width = scrolled + '%';
+});
+
+// Back to Top Button
+const backToTop = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    backToTop.classList.add('show');
+  } else {
+    backToTop.classList.remove('show');
+  }
+});
+
+backToTop?.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
 // Mobile navigation functionality
 const mobile_nav = document.querySelector(".mobile-navbar-btn");
 const navLinks = document.getElementsByClassName("navbar-link");
@@ -185,25 +292,34 @@ const displayProjects = () => {
         const popup = item.querySelector('.popup');
         popup.style.display = 'flex';
         popup.style.visibility = 'visible';
+        // Add active class for animation
+        setTimeout(() => {
+          popup.classList.add('active');
+        }, 10);
         // Focus on close button for keyboard navigation
         setTimeout(() => {
           popup.querySelector('.close-popup').focus();
         }, 100);
+        document.body.style.overflow = 'hidden';
       }
     });
   });
 };
 
-// Enhanced popup functionality with keyboard support
+// Enhanced popup functionality with keyboard support and animations
 const initializePopups = () => {
   const popupClose = document.querySelectorAll(".close-popup");
   const knowMoreBtns = document.querySelectorAll(".know-more");
   const popup = document.querySelectorAll(".popup");
-  
+
   for (let i = 0; i < knowMoreBtns.length; i++) {
     knowMoreBtns[i].addEventListener("click", () => {
       popup[i].style.display = "flex";
       popup[i].style.visibility = "visible";
+      // Add active class for animation
+      setTimeout(() => {
+        popup[i].classList.add('active');
+      }, 10);
       // Focus management for accessibility
       setTimeout(() => {
         popup[i].querySelector('.close-popup').focus();
@@ -212,34 +328,36 @@ const initializePopups = () => {
       document.body.style.overflow = 'hidden';
     });
   }
-  
+
+  const closePopup = (index) => {
+    popup[index].classList.remove('active');
+    setTimeout(() => {
+      popup[index].style.display = "none";
+      popup[index].style.visibility = "hidden";
+      document.body.style.overflow = 'auto';
+    }, 300);
+  };
+
   for (let i = 0; i < popupClose.length; i++) {
     popupClose[i].addEventListener("click", () => {
-      popup[i].style.display = "none";
-      popup[i].style.visibility = "hidden";
-      // Restore body scroll
-      document.body.style.overflow = 'auto';
+      closePopup(i);
     });
-    
+
     // Keyboard support for close button
     popupClose[i].addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        popup[i].style.display = "none";
-        popup[i].style.visibility = "hidden";
-        document.body.style.overflow = 'auto';
+        closePopup(i);
       }
     });
   }
-  
+
   // Close popup with Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      popup.forEach(p => {
+      popup.forEach((p, index) => {
         if (p.style.display === 'flex') {
-          p.style.display = 'none';
-          p.style.visibility = 'hidden';
-          document.body.style.overflow = 'auto';
+          closePopup(index);
         }
       });
     }
@@ -292,35 +410,76 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// Toast Notification System
+const toastContainer = document.getElementById('toast-container');
+
+const showToast = (message, type = 'success') => {
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+
+  const icon = type === 'success'
+    ? '<i class="fa-solid fa-circle-check toast-icon"></i>'
+    : '<i class="fa-solid fa-circle-exclamation toast-icon"></i>';
+
+  toast.innerHTML = `
+    ${icon}
+    <div class="toast-message">${message}</div>
+  `;
+
+  toastContainer.appendChild(toast);
+
+  // Auto remove after 4 seconds
+  setTimeout(() => {
+    toast.classList.add('removing');
+    setTimeout(() => {
+      toast.remove();
+    }, 300);
+  }, 4000);
+};
+
 // Form validation and submission handling
 const contactForm = document.querySelector('.contact-form');
 const submitBtn = document.querySelector('.submit-btn');
 const btnText = document.querySelector('.btn-text');
 const btnLoading = document.querySelector('.btn-loading');
 
+// Check for success parameter in URL
+window.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('success') === 'true') {
+    showToast('Message sent successfully! Thank you for reaching out.', 'success');
+    // Clean URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+});
+
 contactForm?.addEventListener('submit', function(e) {
   // Show loading state
   submitBtn.disabled = true;
   btnText.style.display = 'none';
   btnLoading.style.display = 'inline';
-  
+
   // Form will submit normally to FormSubmit
   // Loading state will be visible until page redirect
 });
 
 // Input validation styling
 const inputs = document.querySelectorAll('input, textarea');
+const successColor = getComputedStyle(document.documentElement).getPropertyValue('--color-success').trim();
+const errorColor = getComputedStyle(document.documentElement).getPropertyValue('--color-error').trim();
+const borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim();
+
 inputs.forEach(input => {
   input.addEventListener('blur', function() {
     if (this.validity.valid) {
-      this.style.borderColor = '#28a745';
+      this.style.borderColor = successColor;
     } else {
-      this.style.borderColor = '#dc3545';
+      this.style.borderColor = errorColor;
     }
   });
-  
+
   input.addEventListener('input', function() {
-    this.style.borderColor = '#e9ecef';
+    this.style.borderColor = borderColor;
   });
 });
 
