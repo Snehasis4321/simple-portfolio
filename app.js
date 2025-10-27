@@ -42,6 +42,7 @@ const roles = [
   "Full Stack Web Developer",
   "Mobile App Developer",
   "UI/UX Designer",
+  "Cloud Engineer",
   "Content Creator",
 ];
 let roleIndex = 0;
@@ -185,61 +186,60 @@ displaySkill();
 // Projects data
 const projects = [
   {
-    name: "Portfolio Website",
+    name: "PingXD",
     description:
-      "This is my portfolio website. I have used plain HTML, CSS, JavaScript, to create this website.",
+      "A cutting-edge website testing tool that empowers you to optimize performance and troubleshoot issues with your website, ensuring a seamless user experience.",
     thumbnail: "svg/undraw_profile_re_4a55.svg",
-    link: "#",
-    techStack: ["HTML", "CSS", "JavaScript"],
+    link: "https://www.pingxd.com",
+    techStack: ["NextJS", "TailwindCSS", "AWS lambda", "AWS S3", "AWS ECS"],
   },
   {
-    name: "Online Voting App",
+    name: "LinkMeow",
     description:
-      "This is a simple online voting app. I have used HTML, CSS, JavaScript for the frontend and MongoDB for the backend to create this website.",
+      "A Link in Bio and URL Shortener tool that allows you to generate unique and short URLs for your social media profiles, making it easy to share and connect with others.",
     thumbnail: "svg/undraw_election_day_w842.svg",
-    link: "https://github.com/Snehasis4321/Voting-App-Mongo",
-    techStack: ["HTML", "CSS", "JavaScript", "MongoDB", "Node JS"],
-  },
-  {
-    name: "Toxic Comment Classifier",
-    description:
-      "A Toxic comment classifier is a machine learning model that can classify a comment as toxic or non-toxic. I have used Python, Flask, Sklearn, NLTK, and Bulma to create this website.",
-    thumbnail: "svg/undraw_trends_re_2bd0.svg",
-    link: "https://github.com/Snehasis4321/Toxic-Comment-Web",
+    link: "https://www.linkmeow.com",
     techStack: [
-      "Python",
-      "Flask",
-      "Sklearn",
-      "NLTK",
-      "Machine Learning",
-      "Bulma",
-      "HTML",
-      "CSS",
+      "NextJS",
+      "TailwindCSS",
+      "AWS EC2",
+      "AWS S3",
+      "AWS SES",
+      "Cloudfront",
+      "Redis",
     ],
   },
   {
-    name: "Covid-19 Tracker",
+    name: "Nice Offers",
     description:
-      "A Covid-19 Tracker is a website that can track the number of covid-19 cases in a country. I have used Flutter & Dart with Firebase and API to create this android app.",
+      "Discover a curated collection of limited-time free courses and apps on our online platform. These resources are available for a limited time only, after which they revert back to their regular paid prices. Take advantage of this opportunity to enhance your knowledge and skills at no cost!",
+    thumbnail: "svg/undraw_trends_re_2bd0.svg",
+    link: "https://niceoffers.arenabear.com",
+    techStack: ["Python", "ECS", "RDS", "Cloudfront", "Next JS", "Flutter"],
+  },
+  {
+    name: "Expense Tracker App",
+    description:
+      "Track your daily and monthly expenses effortlessly with our ad-free expense tracker app. Get detailed analytics and comparisons through interactive charts and graphs, all without the need for sign-up. Take control of your finances with our user-friendly app.",
     thumbnail: "svg/undraw_medical_research_qg4d.svg",
-    link: "https://github.com/Snehasis4321/covid19_helper_web",
-    techStack: ["Flutter", "Dart", "API", "Firebase"],
+    link: "https://play.google.com/store/apps/details?id=com.arenabear.expense_tracker_app",
+    techStack: ["Flutter", "Dart", "Sqflite", "Provider"],
   },
   {
-    name: "Weather App",
+    name: "Ecommerce Flutter App",
     description:
-      "This is a simple weather app website. I have used HTML, CSS, JavaScript, and API to create this website.",
+      "An ecommerce app built with Flutter that features a user-friendly interface, secure payment processing, and a responsive design for a seamless shopping experience.",
     thumbnail: "svg/undraw_weather_re_qsmd.svg",
-    link: "https://github.com/Coolmangamer786/SimpleWeatherApp",
-    techStack: ["HTML", "CSS", "JavaScript", "API"],
+    link: "https://github.com/Snehasis4321/ecommerce_app_flutter_firebase",
+    techStack: ["Flutter", "Dart", "Firebase", "Cloudinary", "Provider"],
   },
   {
-    name: "Black-Shop Site",
+    name: "Realtime Chat App",
     description:
-      "This is a simple e-commerce website. I have used HTML, CSS, JavaScript, and Firebase to create this website.",
+      "A realtime chat app built with Flutter that features a user-friendly interface, secure payment processing, and a responsive design for a seamless shopping experience.",
     thumbnail: "svg/undraw_web_shopping_re_owap.svg",
-    link: "https://github.com/Snehasis4321/Black-Shop",
-    techStack: ["HTML", "CSS", "JavaScript", "Firebase"],
+    link: "https://github.com/Snehasis4321/realtime_chatapp_appwrite",
+    techStack: ["Flutter", "Dart", "Appwrite", "Websockets", "Provider"],
   },
 ];
 
