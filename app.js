@@ -1,35 +1,35 @@
 // Theme toggle functionality
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
+const themeToggle = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
 const root = document.documentElement;
 
 // Load theme from localStorage
 const loadTheme = () => {
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  root.setAttribute('data-theme', savedTheme);
+  const savedTheme = localStorage.getItem("theme") || "light";
+  root.setAttribute("data-theme", savedTheme);
   updateThemeIcon(savedTheme);
 };
 
 // Update theme icon
 const updateThemeIcon = (theme) => {
-  if (theme === 'dark') {
-    themeIcon.classList.remove('fa-moon');
-    themeIcon.classList.add('fa-sun');
-    themeToggle.setAttribute('aria-label', 'Switch to light mode');
+  if (theme === "dark") {
+    themeIcon.classList.remove("fa-moon");
+    themeIcon.classList.add("fa-sun");
+    themeToggle.setAttribute("aria-label", "Switch to light mode");
   } else {
-    themeIcon.classList.remove('fa-sun');
-    themeIcon.classList.add('fa-moon');
-    themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+    themeIcon.classList.remove("fa-sun");
+    themeIcon.classList.add("fa-moon");
+    themeToggle.setAttribute("aria-label", "Switch to dark mode");
   }
 };
 
 // Toggle theme
-themeToggle?.addEventListener('click', () => {
-  const currentTheme = root.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+themeToggle?.addEventListener("click", () => {
+  const currentTheme = root.getAttribute("data-theme");
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
 
-  root.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
+  root.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
   updateThemeIcon(newTheme);
 });
 
@@ -37,12 +37,12 @@ themeToggle?.addEventListener('click', () => {
 loadTheme();
 
 // Typing Animation Effect
-const typingText = document.getElementById('typing-text');
+const typingText = document.getElementById("typing-text");
 const roles = [
-  'Full Stack Web Developer',
-  'Mobile App Developer',
-  'UI/UX Designer',
-  'Content Creator'
+  "Full Stack Web Developer",
+  "Mobile App Developer",
+  "UI/UX Designer",
+  "Content Creator",
 ];
 let roleIndex = 0;
 let charIndex = 0;
@@ -79,29 +79,31 @@ const typeRole = () => {
 setTimeout(typeRole, 1000);
 
 // Scroll Progress Indicator
-const scrollProgress = document.getElementById('scroll-progress');
+const scrollProgress = document.getElementById("scroll-progress");
 
-window.addEventListener('scroll', () => {
-  const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+window.addEventListener("scroll", () => {
+  const windowHeight =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
   const scrolled = (window.scrollY / windowHeight) * 100;
-  scrollProgress.style.width = scrolled + '%';
+  scrollProgress.style.width = scrolled + "%";
 });
 
 // Back to Top Button
-const backToTop = document.getElementById('back-to-top');
+const backToTop = document.getElementById("back-to-top");
 
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
   if (window.scrollY > 300) {
-    backToTop.classList.add('show');
+    backToTop.classList.add("show");
   } else {
-    backToTop.classList.remove('show');
+    backToTop.classList.remove("show");
   }
 });
 
-backToTop?.addEventListener('click', () => {
+backToTop?.addEventListener("click", () => {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth'
+    behavior: "smooth",
   });
 });
 
@@ -166,12 +168,12 @@ const displaySkill = () => {
   `;
   });
   skillsContainer.innerHTML = skillsList.join("");
-  
+
   // Animate skill bars after a short delay
   setTimeout(() => {
-    const skillBars = document.querySelectorAll('.skill-progress');
-    skillBars.forEach(bar => {
-      const width = bar.getAttribute('data-width');
+    const skillBars = document.querySelectorAll(".skill-progress");
+    skillBars.forEach((bar) => {
+      const width = bar.getAttribute("data-width");
       bar.style.width = width;
     });
   }, 100);
@@ -261,15 +263,23 @@ const displayProjects = () => {
     <div class="popup" style="display: none" role="dialog" aria-modal="true" aria-labelledby="project-title-${index}">
         <div class="popup-content">
 
-            <img src="${project.thumbnail}" alt="${project.name} project screenshot">
+            <img src="${project.thumbnail}" alt="${
+      project.name
+    } project screenshot">
             <div class="info">
 
                 <h1 id="project-title-${index}">${project.name}</h1>
                 <p>${project.description}</p>
                 <h3>Tech Stack:</h3>
-                <p>${project.techStack.map((tech) => `<span class="tech-tag">${tech}</span>`).join(' ')}</p>
+                <p>${project.techStack
+                  .map((tech) => `<span class="tech-tag">${tech}</span>`)
+                  .join(" ")}</p>
                 <div class="buttons">
-                    <a href="${project.link}" target="_blank" rel="noopener noreferrer" aria-label="Visit ${project.name} website">
+                    <a href="${
+                      project.link
+                    }" target="_blank" rel="noopener noreferrer" aria-label="Visit ${
+      project.name
+    } website">
                         <div class="visit-website">Visit Website</div>
                     </a>
                     <div class="close-popup" role="button" tabindex="0" aria-label="Close popup">Close</div>
@@ -282,25 +292,25 @@ const displayProjects = () => {
 `;
   });
   projectsContainer.innerHTML = projectsList.join("");
-  
+
   // Add keyboard navigation for project items
-  const projectItems = document.querySelectorAll('.items');
+  const projectItems = document.querySelectorAll(".items");
   projectItems.forEach((item, index) => {
-    item.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        const popup = item.querySelector('.popup');
-        popup.style.display = 'flex';
-        popup.style.visibility = 'visible';
+        const popup = item.querySelector(".popup");
+        popup.style.display = "flex";
+        popup.style.visibility = "visible";
         // Add active class for animation
         setTimeout(() => {
-          popup.classList.add('active');
+          popup.classList.add("active");
         }, 10);
         // Focus on close button for keyboard navigation
         setTimeout(() => {
-          popup.querySelector('.close-popup').focus();
+          popup.querySelector(".close-popup").focus();
         }, 100);
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
       }
     });
   });
@@ -318,23 +328,23 @@ const initializePopups = () => {
       popup[i].style.visibility = "visible";
       // Add active class for animation
       setTimeout(() => {
-        popup[i].classList.add('active');
+        popup[i].classList.add("active");
       }, 10);
       // Focus management for accessibility
       setTimeout(() => {
-        popup[i].querySelector('.close-popup').focus();
+        popup[i].querySelector(".close-popup").focus();
       }, 100);
       // Prevent body scroll
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     });
   }
 
   const closePopup = (index) => {
-    popup[index].classList.remove('active');
+    popup[index].classList.remove("active");
     setTimeout(() => {
       popup[index].style.display = "none";
       popup[index].style.visibility = "hidden";
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }, 300);
   };
 
@@ -344,8 +354,8 @@ const initializePopups = () => {
     });
 
     // Keyboard support for close button
-    popupClose[i].addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+    popupClose[i].addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         closePopup(i);
       }
@@ -353,10 +363,10 @@ const initializePopups = () => {
   }
 
   // Close popup with Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       popup.forEach((p, index) => {
-        if (p.style.display === 'flex') {
+        if (p.style.display === "flex") {
           closePopup(index);
         }
       });
@@ -387,39 +397,129 @@ moreskills?.addEventListener("click", () => {
     skills = { ...originalSkills };
     displaySkill();
     isExpanded = false;
-    moreskills.innerHTML = 'View More <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>';
+    moreskills.innerHTML =
+      'View More <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>';
   } else {
     skills = { ...originalSkills, ...extraSkills };
     displaySkill();
     isExpanded = true;
-    moreskills.innerHTML = 'View Less <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>';
+    moreskills.innerHTML =
+      'View Less <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>';
   }
 });
 
+// Certifications data
+const certifications = [
+  {
+    name: "AWS Certified Solutions Architect – Associate",
+    issuer: "Amazon Web Services",
+    date: "December 2024",
+    exam: "SAA-C03",
+    icon: "fa-brands fa-aws",
+    verifyLink:
+      "https://www.credly.com/badges/9d0213bf-4937-4202-8baf-c9d45c8b6915",
+    credentialLink:
+      "https://www.credly.com/badges/9d0213bf-4937-4202-8baf-c9d45c8b6915",
+  },
+  {
+    name: "Microsoft Certified: Azure Data Fundamentals",
+    issuer: "Microsoft Azure",
+    date: "July 2022",
+    exam: "DP-900",
+    icon: "fa-brands fa-microsoft",
+    verifyLink:
+      "https://www.credly.com/badges/af81f64e-ce37-4967-b11f-77ea2936055d",
+    credentialLink:
+      "https://www.credly.com/badges/af81f64e-ce37-4967-b11f-77ea2936055d",
+  },
+  {
+    name: "Microsoft Certified: Azure Fundamentals",
+    issuer: "Microsoft Azure Cloud",
+    date: "July 2022",
+    exam: "AZ-900",
+    icon: "fa-brands fa-microsoft",
+    verifyLink:
+      "https://www.credly.com/badges/1172dd87-8ca3-4f6b-a287-2394cfc74507",
+    credentialLink:
+      "https://www.credly.com/badges/1172dd87-8ca3-4f6b-a287-2394cfc74507",
+  },
+];
+
+const certificationsContainer = document.querySelector(
+  ".certifications-container"
+);
+
+// Display certifications
+const displayCertifications = () => {
+  const certificationsList = certifications.map((cert) => {
+    return `
+      <div class="certification-card" data-aos="fade-up">
+        <div class="cert-header">
+          <div class="cert-icon">
+            <i class="${cert.icon}"></i>
+          </div>
+          <div class="cert-info">
+            <h3 class="cert-name">${cert.name}</h3>
+            <div class="cert-issuer">
+              <i class="fa-solid fa-building"></i>
+              <span>${cert.issuer}</span>
+            </div>
+          </div>
+        </div>
+        <div class="cert-details">
+          <div class="cert-date">
+            <i class="fa-solid fa-calendar"></i>
+            <span>Issued: ${cert.date}</span>
+          </div>
+          <div class="cert-id">
+            <i class="fa-solid fa-fingerprint"></i>
+            <span>Exam ID: ${cert.exam}</span>
+          </div>
+        </div>
+        <div class="cert-actions">
+          <a href="${cert.verifyLink}" target="_blank" rel="noopener noreferrer" class="cert-link">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Verify</span>
+          </a>
+          <a href="${cert.credentialLink}" target="_blank" rel="noopener noreferrer" class="cert-link secondary">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>View Credential</span>
+          </a>
+        </div>
+      </div>
+    `;
+  });
+  certificationsContainer.innerHTML = certificationsList.join("");
+};
+
+// Initialize certifications display
+displayCertifications();
+
 // Add smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const target = document.querySelector(this.getAttribute("href"));
     if (target) {
       target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+        behavior: "smooth",
+        block: "start",
       });
     }
   });
 });
 
 // Toast Notification System
-const toastContainer = document.getElementById('toast-container');
+const toastContainer = document.getElementById("toast-container");
 
-const showToast = (message, type = 'success') => {
-  const toast = document.createElement('div');
+const showToast = (message, type = "success") => {
+  const toast = document.createElement("div");
   toast.className = `toast ${type}`;
 
-  const icon = type === 'success'
-    ? '<i class="fa-solid fa-circle-check toast-icon"></i>'
-    : '<i class="fa-solid fa-circle-exclamation toast-icon"></i>';
+  const icon =
+    type === "success"
+      ? '<i class="fa-solid fa-circle-check toast-icon"></i>'
+      : '<i class="fa-solid fa-circle-exclamation toast-icon"></i>';
 
   toast.innerHTML = `
     ${icon}
@@ -430,7 +530,7 @@ const showToast = (message, type = 'success') => {
 
   // Auto remove after 4 seconds
   setTimeout(() => {
-    toast.classList.add('removing');
+    toast.classList.add("removing");
     setTimeout(() => {
       toast.remove();
     }, 300);
@@ -438,39 +538,48 @@ const showToast = (message, type = 'success') => {
 };
 
 // Form validation and submission handling
-const contactForm = document.querySelector('.contact-form');
-const submitBtn = document.querySelector('.submit-btn');
-const btnText = document.querySelector('.btn-text');
-const btnLoading = document.querySelector('.btn-loading');
+const contactForm = document.querySelector(".contact-form");
+const submitBtn = document.querySelector(".submit-btn");
+const btnText = document.querySelector(".btn-text");
+const btnLoading = document.querySelector(".btn-loading");
 
 // Check for success parameter in URL
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('success') === 'true') {
-    showToast('Message sent successfully! Thank you for reaching out.', 'success');
+  if (urlParams.get("success") === "true") {
+    showToast(
+      "Message sent successfully! Thank you for reaching out.",
+      "success"
+    );
     // Clean URL
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 });
 
-contactForm?.addEventListener('submit', function(e) {
+contactForm?.addEventListener("submit", function (e) {
   // Show loading state
   submitBtn.disabled = true;
-  btnText.style.display = 'none';
-  btnLoading.style.display = 'inline';
+  btnText.style.display = "none";
+  btnLoading.style.display = "inline";
 
   // Form will submit normally to FormSubmit
   // Loading state will be visible until page redirect
 });
 
 // Input validation styling
-const inputs = document.querySelectorAll('input, textarea');
-const successColor = getComputedStyle(document.documentElement).getPropertyValue('--color-success').trim();
-const errorColor = getComputedStyle(document.documentElement).getPropertyValue('--color-error').trim();
-const borderColor = getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim();
+const inputs = document.querySelectorAll("input, textarea");
+const successColor = getComputedStyle(document.documentElement)
+  .getPropertyValue("--color-success")
+  .trim();
+const errorColor = getComputedStyle(document.documentElement)
+  .getPropertyValue("--color-error")
+  .trim();
+const borderColor = getComputedStyle(document.documentElement)
+  .getPropertyValue("--border-color")
+  .trim();
 
-inputs.forEach(input => {
-  input.addEventListener('blur', function() {
+inputs.forEach((input) => {
+  input.addEventListener("blur", function () {
     if (this.validity.valid) {
       this.style.borderColor = successColor;
     } else {
@@ -478,23 +587,23 @@ inputs.forEach(input => {
     }
   });
 
-  input.addEventListener('input', function() {
+  input.addEventListener("input", function () {
     this.style.borderColor = borderColor;
   });
 });
 
 // Lazy loading for images
 const images = document.querySelectorAll('img[loading="lazy"]');
-if ('IntersectionObserver' in window) {
+if ("IntersectionObserver" in window) {
   const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const img = entry.target;
-        img.classList.add('loaded');
+        img.classList.add("loaded");
         observer.unobserve(img);
       }
     });
   });
-  
-  images.forEach(img => imageObserver.observe(img));
+
+  images.forEach((img) => imageObserver.observe(img));
 }

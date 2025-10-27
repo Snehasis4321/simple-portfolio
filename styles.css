@@ -602,6 +602,164 @@ body.page-load {
   transform: translateY(-2px);
   box-shadow: var(--shadow-primary);
 }
+
+/* Certifications Section */
+.certifications-section {
+  padding: 10% 5%;
+  background-color: var(--bg-section);
+}
+
+.certifications-section h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 1.6rem;
+  color: var(--text-primary);
+}
+
+.certifications-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.certification-card {
+  background: var(--bg-card);
+  border-radius: 1.5rem;
+  padding: 3rem;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-smooth);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.certification-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.certification-card:hover::before {
+  transform: scaleX(1);
+}
+
+.certification-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+.cert-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cert-icon {
+  width: 6rem;
+  height: 6rem;
+  background: var(--gradient-primary);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+.cert-info {
+  flex: 1;
+}
+
+.cert-name {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.cert-issuer {
+  font-size: 1.6rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cert-issuer i {
+  color: var(--color-primary);
+}
+
+.cert-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.cert-date,
+.cert-id {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cert-date i,
+.cert-id i {
+  color: var(--color-primary);
+  font-size: 1.6rem;
+}
+
+.cert-actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.cert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background: var(--gradient-primary);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 0.8rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.cert-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}
+
+.cert-link.secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.cert-link.secondary:hover {
+  background: var(--color-primary);
+  color: var(--text-light);
+}
+
 .projects-section {
   /* background-color: #5361ff; */
   padding: 10% 5%;
@@ -700,48 +858,81 @@ body.page-load {
   .section-hero {
     gap: 1rem;
   }
-  
+
   .info .tagline {
     font-size: 2.2rem;
   }
-  
+
   .info .intro {
     font-size: 1.8rem;
   }
-  
+
   .about-text {
     font-size: 2.2rem;
   }
-  
+
   .skills-container {
     gap: 1rem;
   }
-  
+
+  .certifications-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .certification-card {
+    padding: 2rem;
+  }
+
+  .cert-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cert-name {
+    font-size: 2rem;
+  }
+
+  .cert-issuer {
+    justify-content: center;
+  }
+
+  .cert-actions {
+    justify-content: center;
+  }
+
+  .cert-link {
+    flex: 1;
+    justify-content: center;
+    min-width: 100%;
+  }
+
   .tech-tag {
     font-size: 1.2rem;
     padding: 0.3rem 0.6rem;
   }
-  
+
   .contact-section {
     padding: 2rem 1rem;
   }
-  
+
   .contact-section h1 {
     font-size: 3rem;
     margin-bottom: 2rem;
   }
-  
+
   .contact {
     padding: 0;
   }
-  
+
   input[type="text"],
   input[type="email"],
   textarea[name="message"] {
     font-size: 1.4rem;
     padding: 12px;
   }
-  
+
   .submit-btn {
     font-size: 1.6rem;
     padding: 1.2rem 2rem;
