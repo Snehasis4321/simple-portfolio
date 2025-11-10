@@ -216,7 +216,7 @@ const projects = [
     name: "PingXD",
     description:
       "A cutting-edge website testing tool that empowers you to optimize performance and troubleshoot issues with your website, ensuring a seamless user experience.",
-    thumbnail: "svg/undraw_profile_re_4a55.svg",
+    thumbnail: "assets/pingxd.png",
     link: "https://www.pingxd.com",
     techStack: ["NextJS", "TailwindCSS", "AWS lambda", "AWS S3", "AWS ECS"],
   },
@@ -224,7 +224,7 @@ const projects = [
     name: "LinkMeow",
     description:
       "A Link in Bio and URL Shortener tool that allows you to generate unique and short URLs for your social media profiles, making it easy to share and connect with others.",
-    thumbnail: "svg/undraw_election_day_w842.svg",
+    thumbnail: "assets/Linkmeow.png",
     link: "https://www.linkmeow.com",
     techStack: [
       "NextJS",
@@ -240,7 +240,7 @@ const projects = [
     name: "Nice Offers",
     description:
       "Discover a curated collection of limited-time free courses and apps on our online platform. These resources are available for a limited time only, after which they revert back to their regular paid prices. Take advantage of this opportunity to enhance your knowledge and skills at no cost!",
-    thumbnail: "svg/undraw_trends_re_2bd0.svg",
+    thumbnail: "assets/niceoffers.png",
     link: "https://niceoffers.arenabear.com",
     techStack: ["Python", "ECS", "RDS", "Cloudfront", "Next JS", "Flutter"],
   },
@@ -248,7 +248,7 @@ const projects = [
     name: "Expense Tracker App",
     description:
       "Track your daily and monthly expenses effortlessly with our ad-free expense tracker app. Get detailed analytics and comparisons through interactive charts and graphs, all without the need for sign-up. Take control of your finances with our user-friendly app.",
-    thumbnail: "svg/undraw_medical_research_qg4d.svg",
+    thumbnail: "assets/expense-tracker.png",
     link: "https://play.google.com/store/apps/details?id=com.arenabear.expense_tracker_app",
     techStack: ["Flutter", "Dart", "Sqflite", "Provider"],
   },
@@ -256,7 +256,7 @@ const projects = [
     name: "Ecommerce Flutter App",
     description:
       "An ecommerce app built with Flutter that features a user-friendly interface, secure payment processing, and a responsive design for a seamless shopping experience.",
-    thumbnail: "svg/undraw_weather_re_qsmd.svg",
+    thumbnail: "assets/Ecom-app.png",
     link: "https://github.com/Snehasis4321/ecommerce_app_flutter_firebase",
     techStack: ["Flutter", "Dart", "Firebase", "Cloudinary", "Provider"],
   },
@@ -264,7 +264,7 @@ const projects = [
     name: "Realtime Chat App",
     description:
       "A realtime chat app built with Flutter that features a user-friendly interface, secure payment processing, and a responsive design for a seamless shopping experience.",
-    thumbnail: "svg/undraw_web_shopping_re_owap.svg",
+    thumbnail: "assets/realtime-chat.png",
     link: "https://github.com/Snehasis4321/realtime_chatapp_appwrite",
     techStack: ["Flutter", "Dart", "Appwrite", "Websockets", "Provider"],
   },
