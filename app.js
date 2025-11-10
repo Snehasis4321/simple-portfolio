@@ -245,7 +245,122 @@ const projects = [
 
 const projectsContainer = document.querySelector(".all-projects");
 
-// Display projects with improved accessibility
+// Create a single global modal for project details
+const createProjectModal = () => {
+  const modal = document.createElement("div");
+  modal.className = "popup";
+  modal.id = "project-modal";
+  modal.style.display = "none";
+  modal.style.visibility = "hidden";
+  modal.innerHTML = `
+    <div class="popup-content">
+      <img id="project-modal-image" alt="Project screenshot">
+      <div class="info">
+        <h1 id="project-modal-title"></h1>
+        <p id="project-modal-description"></p>
+        <h3>Tech Stack:</h3>
+        <p id="project-modal-tech"></p>
+        <div class="buttons">
+          <a id="project-modal-link" target="_blank" rel="noopener noreferrer" aria-label="Visit project website">
+            <div class="visit-website">Visit Website</div>
+          </a>
+          <div class="close-popup" role="button" tabindex="0" aria-label="Close popup">Close</div>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  return modal;
+};
+
+const projectModal = createProjectModal();
+
+// Setup scroll indicators and overflow behavior for modal content
+const setupModalOverflowHandling = () => {
+  const content = projectModal.querySelector(".popup-content");
+  const tech = document.getElementById("project-modal-tech");
+  if (!content) return;
+
+  const updateIndicators = () => {
+    const canScroll = content.scrollHeight > content.clientHeight ||
+                      content.scrollWidth > content.clientWidth;
+    content.classList.toggle("scrollable", canScroll);
+    const atTop = content.scrollTop <= 1;
+    const atBottom = (content.scrollTop + content.clientHeight) >= (content.scrollHeight - 1);
+    content.classList.toggle("at-top", atTop);
+    content.classList.toggle("at-bottom", atBottom);
+  };
+
+  if (!content.dataset.scrollHandlerSetup) {
+    content.addEventListener("scroll", updateIndicators);
+    window.addEventListener("resize", updateIndicators);
+    content.dataset.scrollHandlerSetup = "true";
+  }
+  updateIndicators();
+
+  const updateTechIndicators = () => {
+    if (!tech) return;
+    const canScrollH = tech.scrollWidth > tech.clientWidth;
+    tech.classList.toggle("scrollable", canScrollH);
+    const atLeft = tech.scrollLeft <= 1;
+    const atRight = (tech.scrollLeft + tech.clientWidth) >= (tech.scrollWidth - 1);
+    tech.classList.toggle("at-left", atLeft);
+    tech.classList.toggle("at-right", atRight);
+  };
+
+  if (tech && !tech.dataset.scrollHandlerSetup) {
+    tech.addEventListener("scroll", updateTechIndicators);
+    tech.dataset.scrollHandlerSetup = "true";
+  }
+  updateTechIndicators();
+};
+
+const openProjectModal = (project) => {
+  const img = document.getElementById("project-modal-image");
+  const title = document.getElementById("project-modal-title");
+  const desc = document.getElementById("project-modal-description");
+  const tech = document.getElementById("project-modal-tech");
+  const link = document.getElementById("project-modal-link");
+
+  img.src = project.thumbnail;
+  img.alt = `${project.name} project screenshot`;
+  title.textContent = project.name;
+  desc.textContent = project.description;
+  tech.innerHTML = project.techStack.map(t => `<span class="tech-tag">${t}</span>`).join(" ");
+  link.href = project.link;
+  link.setAttribute("aria-label", `Visit ${project.name} website`);
+
+  projectModal.style.display = "flex";
+  projectModal.style.visibility = "visible";
+  setTimeout(() => projectModal.classList.add("active"), 10);
+  // Apply overflow handling after content is laid out
+  setTimeout(() => setupModalOverflowHandling(), 30);
+  setTimeout(() => projectModal.querySelector(".close-popup").focus(), 100);
+  document.body.style.overflow = "hidden";
+};
+
+const closeProjectModal = () => {
+  projectModal.classList.remove("active");
+  setTimeout(() => {
+    projectModal.style.display = "none";
+    projectModal.style.visibility = "hidden";
+    document.body.style.overflow = "auto";
+  }, 300);
+};
+
+projectModal.querySelector(".close-popup").addEventListener("click", closeProjectModal);
+projectModal.querySelector(".close-popup").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    closeProjectModal();
+  }
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && projectModal.style.display === "flex") {
+    closeProjectModal();
+  }
+});
+
+// Display projects with improved accessibility (cards only; modal is global)
 const displayProjects = () => {
   const projectsList = projects.map((project, index) => {
     return `
@@ -256,121 +371,28 @@ const displayProjects = () => {
     <div class="name">
         <h1>${project.name}</h1>
     </div>
-
-    <div class="know-more">
-        <i class="fa-solid fa-magnifying-glass-plus fa-8x" aria-hidden="true"></i>
-    </div>
-    <div class="popup" style="display: none" role="dialog" aria-modal="true" aria-labelledby="project-title-${index}">
-        <div class="popup-content">
-
-            <img src="${project.thumbnail}" alt="${
-      project.name
-    } project screenshot">
-            <div class="info">
-
-                <h1 id="project-title-${index}">${project.name}</h1>
-                <p>${project.description}</p>
-                <h3>Tech Stack:</h3>
-                <p>${project.techStack
-                  .map((tech) => `<span class="tech-tag">${tech}</span>`)
-                  .join(" ")}</p>
-                <div class="buttons">
-                    <a href="${
-                      project.link
-                    }" target="_blank" rel="noopener noreferrer" aria-label="Visit ${
-      project.name
-    } website">
-                        <div class="visit-website">Visit Website</div>
-                    </a>
-                    <div class="close-popup" role="button" tabindex="0" aria-label="Close popup">Close</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </div>
 `;
   });
   projectsContainer.innerHTML = projectsList.join("");
 
-  // Add keyboard navigation for project items
+  // Keyboard navigation to open global modal
   const projectItems = document.querySelectorAll(".items");
   projectItems.forEach((item, index) => {
     item.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        const popup = item.querySelector(".popup");
-        popup.style.display = "flex";
-        popup.style.visibility = "visible";
-        // Add active class for animation
-        setTimeout(() => {
-          popup.classList.add("active");
-        }, 10);
-        // Focus on close button for keyboard navigation
-        setTimeout(() => {
-          popup.querySelector(".close-popup").focus();
-        }, 100);
-        document.body.style.overflow = "hidden";
+        openProjectModal(projects[index]);
       }
     });
   });
 };
 
-// Enhanced popup functionality with keyboard support and animations
+// Hook up click handlers to open global modal
 const initializePopups = () => {
-  const popupClose = document.querySelectorAll(".close-popup");
-  const knowMoreBtns = document.querySelectorAll(".know-more");
-  const popup = document.querySelectorAll(".popup");
-
-  for (let i = 0; i < knowMoreBtns.length; i++) {
-    knowMoreBtns[i].addEventListener("click", () => {
-      popup[i].style.display = "flex";
-      popup[i].style.visibility = "visible";
-      // Add active class for animation
-      setTimeout(() => {
-        popup[i].classList.add("active");
-      }, 10);
-      // Focus management for accessibility
-      setTimeout(() => {
-        popup[i].querySelector(".close-popup").focus();
-      }, 100);
-      // Prevent body scroll
-      document.body.style.overflow = "hidden";
-    });
-  }
-
-  const closePopup = (index) => {
-    popup[index].classList.remove("active");
-    setTimeout(() => {
-      popup[index].style.display = "none";
-      popup[index].style.visibility = "hidden";
-      document.body.style.overflow = "auto";
-    }, 300);
-  };
-
-  for (let i = 0; i < popupClose.length; i++) {
-    popupClose[i].addEventListener("click", () => {
-      closePopup(i);
-    });
-
-    // Keyboard support for close button
-    popupClose[i].addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        closePopup(i);
-      }
-    });
-  }
-
-  // Close popup with Escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      popup.forEach((p, index) => {
-        if (p.style.display === "flex") {
-          closePopup(index);
-        }
-      });
-    }
+  const projectItems = document.querySelectorAll(".items");
+  projectItems.forEach((item, i) => {
+    item.addEventListener("click", () => openProjectModal(projects[i]));
   });
 };
 
@@ -607,3 +629,318 @@ if ("IntersectionObserver" in window) {
 
   images.forEach((img) => imageObserver.observe(img));
 }
+
+// Particle System
+const createParticles = () => {
+  const particlesContainer = document.createElement('div');
+  particlesContainer.className = 'particles-container';
+  document.body.appendChild(particlesContainer);
+
+  const particleCount = 50;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Random properties
+    const size = Math.random() * 4 + 2;
+    const posX = Math.random() * 100;
+    const posY = Math.random() * 100;
+    const delay = Math.random() * 15;
+    const duration = Math.random() * 10 + 10;
+    
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = `${posX}%`;
+    particle.style.top = `${posY}%`;
+    particle.style.animationDelay = `${delay}s`;
+    particle.style.animationDuration = `${duration}s`;
+    
+    // Random opacity
+    particle.style.opacity = Math.random() * 0.6 + 0.3;
+    
+    particlesContainer.appendChild(particle);
+  }
+};
+
+// Initialize particle system
+createParticles();
+
+// Ripple effect for buttons
+const createRipple = (event) => {
+  const button = event.currentTarget;
+  const ripple = document.createElement('span');
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = event.clientX - rect.left - size / 2;
+  const y = event.clientY - rect.top - size / 2;
+  
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  ripple.classList.add('ripple');
+  
+  button.appendChild(ripple);
+  
+  setTimeout(() => {
+    ripple.remove();
+  }, 600);
+};
+
+// Add ripple effect to buttons
+const buttons = document.querySelectorAll('.submit-btn, .cert-link, .close-popup, .more-skills');
+buttons.forEach(button => {
+  button.addEventListener('click', createRipple);
+});
+
+// Scroll Animation Observer
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+});
+
+// Observe all scroll-animate elements
+document.querySelectorAll('.scroll-animate').forEach(el => {
+  scrollObserver.observe(el);
+});
+
+// Parallax effect on scroll
+let ticking = false;
+
+function updateParallax() {
+  const scrolled = window.pageYOffset;
+  const parallaxBg = document.querySelector('.parallax-bg');
+  const heroContent = document.querySelector('.hero-content');
+  const heroImage = document.querySelector('.hero-image');
+  
+  if (parallaxBg) {
+    parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+  }
+  
+  if (heroContent) {
+    heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+  }
+  
+  if (heroImage) {
+    heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+  }
+  
+  ticking = false;
+}
+
+function requestTick() {
+  if (!ticking) {
+    window.requestAnimationFrame(updateParallax);
+    ticking = true;
+  }
+}
+
+window.addEventListener('scroll', requestTick);
+
+// Enhanced scroll progress with easing
+function updateScrollProgress() {
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  
+  // Add easing to the progress
+  const easedProgress = easeOutCubic(scrollPercent / 100) * 100;
+  
+  if (scrollProgress) {
+    scrollProgress.style.width = easedProgress + '%';
+  }
+}
+
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+window.addEventListener('scroll', updateScrollProgress);
+function animateCircularProgress() {
+  const circularProgressBars = document.querySelectorAll('.circular-progress');
+  
+  circularProgressBars.forEach(bar => {
+    const percentage = bar.getAttribute('data-percentage');
+    const degree = (percentage / 100) * 360;
+    
+    // Animate the conic gradient
+    let currentDegree = 0;
+    const increment = degree / 60; // 60 frames for 1 second animation
+    
+    const animation = setInterval(() => {
+      currentDegree += increment;
+      if (currentDegree >= degree) {
+        currentDegree = degree;
+        clearInterval(animation);
+      }
+      
+      bar.style.background = `conic-gradient(var(--color-primary) ${currentDegree}deg, var(--bg-section) ${currentDegree}deg)`;
+    }, 16); // ~60fps
+  });
+}
+
+// Intersection Observer for circular progress bars
+const progressObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCircularProgress();
+      progressObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+// Observe the skills section
+document.addEventListener('DOMContentLoaded', () => {
+  const skillsSection = document.querySelector('.skill-section');
+  if (skillsSection) {
+    progressObserver.observe(skillsSection);
+  }
+});
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate-in');
+    }
+  });
+}, observerOptions);
+
+// Observe elements for animation
+document.querySelectorAll('.testimonial-card').forEach(card => {
+  observer.observe(card);
+});
+
+// Add smooth scroll behavior for navigation links
+document.querySelectorAll('.navbar-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href').substring(1);
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Observe elements for animation
+document.querySelectorAll('.skill, .certification-card, .items').forEach(el => {
+  observer.observe(el);
+});
+
+// Add animation classes
+const style = document.createElement('style');
+style.textContent = `
+  .animate-in {
+    animation: slideInUp 0.6s ease forwards;
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// Loading screen
+const createLoadingScreen = () => {
+  const loadingScreen = document.createElement('div');
+  loadingScreen.className = 'loading-screen';
+  loadingScreen.innerHTML = `
+    <div class="loading-content">
+      <div class="loading-logo">
+        <img src="https://avatars.githubusercontent.com/u/96995340" alt="Loading...">
+      </div>
+      <div class="loading-text">Loading Portfolio...</div>
+      <div class="loading-spinner"></div>
+    </div>
+  `;
+  
+  const loadingStyles = `
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-body);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+    
+    .loading-content {
+      text-align: center;
+      color: var(--text-primary);
+    }
+    
+    .loading-logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      margin-bottom: 20px;
+    }
+    
+    .loading-text {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--border-color);
+      border-top: 4px solid var(--color-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+  
+  const style = document.createElement('style');
+  style.textContent = loadingStyles;
+  document.head.appendChild(style);
+  
+  document.body.appendChild(loadingScreen);
+  
+  // Remove loading screen after page loads
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      loadingScreen.style.opacity = '0';
+      setTimeout(() => {
+        loadingScreen.remove();
+      }, 500);
+    }, 1000);
+  });
+};
+
+// Initialize loading screen
+createLoadingScreen();

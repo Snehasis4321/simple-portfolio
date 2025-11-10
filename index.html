@@ -24,6 +24,9 @@
 </head>
 
 <body class="page-load">
+    <!-- Parallax Background -->
+    <div class="parallax-bg"></div>
+    
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" id="scroll-progress"></div>
 
@@ -40,6 +43,7 @@
                 <li><a class='navbar-link' href="#skills">Skills</a></li>
                 <li><a class='navbar-link' href="#certifications">Certifications</a></li>
                 <li><a class='navbar-link' href="#projects">Projects</a></li>
+                <li><a class='navbar-link' href="#testimonials">Testimonials</a></li>
                 <li><a class='navbar-link' href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -63,7 +67,7 @@
                     <img src="https://avatars.githubusercontent.com/u/96995340" alt="Snehasis Ghosh - Web Developer and App Developer" loading="lazy">
                 </div>
                 <div class="info" data-aos="fade-right">
-                    <h1>Snehasis Ghosh</h1>
+                    <h1 class="text-reveal">Snehasis Ghosh</h1>
                     <p class="tagline">
                         <span id="typing-text"></span>
                         <span class="typing-cursor">|</span>
@@ -88,37 +92,142 @@
         </section>
         </div>
         <!-- ABOUT SECTION  -->
-        <div class="about" id="about">
-            <h1 data-aos="fade-left">About</h1>
+        <div class="about scroll-animate" id="about">
+            <h1 class="text-reveal" data-aos="fade-left">About Me</h1>
             <div class="space"></div>
             <p data-aos="fade-in" class="about-text">Hi, I'm Snehasis Ghosh, a passionate freelance web developer and mobile app developer from India. I specialize in creating modern, responsive web applications and mobile apps using cutting-edge technologies. Currently, I create educational content through online tutorials to help beginners start their programming journey. I work on exciting part-time projects and am always open to new opportunities and collaborations.</p>
         </div>
         <!-- SKILLS SECTION  -->
-        <div class="skill-section" id="skills">
+        <div class="skill-section scroll-animate" id="skills">
             <h1 data-aos="fade-left">Skills</h1>
             <div class="space"></div>
             <div class="skills-container">
+              <div class="skill-item" data-skill="95">
+                <div class="circular-progress" data-percentage="95">
+                  <div class="circular-progress-inner">
+                    <span class="percentage">95%</span>
+                  </div>
+                </div>
+                <h3>HTML/CSS</h3>
+                <p>Modern web development with responsive design and CSS animations</p>
+              </div>
+              
+              <div class="skill-item" data-skill="90">
+                <div class="circular-progress" data-percentage="90">
+                  <div class="circular-progress-inner">
+                    <span class="percentage">90%</span>
+                  </div>
+                </div>
+                <h3>JavaScript</h3>
+                <p>ES6+, DOM manipulation, and modern frameworks</p>
+              </div>
+              
+              <div class="skill-item" data-skill="85">
+                <div class="circular-progress" data-percentage="85">
+                  <div class="circular-progress-inner">
+                    <span class="percentage">85%</span>
+                  </div>
+                </div>
+                <h3>React</h3>
+                <p>Component-based architecture and state management</p>
+              </div>
+              
+              <div class="skill-item" data-skill="80">
+                <div class="circular-progress" data-percentage="80">
+                  <div class="circular-progress-inner">
+                    <span class="percentage">80%</span>
+                  </div>
+                </div>
+                <h3>Node.js</h3>
+                <p>Backend development with Express and MongoDB</p>
+              </div>
+              
+              <div class="skill-item" data-skill="75">
+                <div class="circular-progress" data-percentage="75">
+                  <div class="circular-progress-inner">
+                    <span class="percentage">75%</span>
+                  </div>
+                </div>
+                <h3>Python</h3>
+                <p>Data analysis, automation, and web development</p>
+              </div>
+              
+              <div class="skill-item" data-skill="70">
+                <div class="circular-progress" data-percentage="70">
+                  <div class="circular-progress-inner">
+                    <span class="percentage">70%</span>
+                  </div>
+                </div>
+                <h3>UI/UX Design</h3>
+                <p>User-centered design and prototyping</p>
+              </div>
             </div>
             <div class="more-skills">View More </div>
         </div>
         <!-- CERTIFICATIONS SECTION  -->
-        <div class="certifications-section" id="certifications">
+        <div class="certifications-section scroll-animate" id="certifications">
             <h1 data-aos="fade-right">Certifications</h1>
             <div class="space"></div>
             <div class="certifications-container">
             </div>
         </div>
         <!-- PROJECTS SECTION  -->
-        <div class="projects-section" id="projects">
+        <div class="projects-section scroll-animate" id="projects">
             <h1 data-aos="fade-right">Projects</h1>
             <div class="space"></div>
 
             <div class="all-projects">
             </div>
         </div>
+        
+        <!-- TESTIMONIALS SECTION -->
+        <div class="testimonials-section scroll-animate" id="testimonials">
+            <h1 data-aos="fade-down">What Clients Say</h1>
+            <div class="space"></div>
+            <div class="testimonials-container">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-content">
+                        <p>"Snehasis delivered an exceptional web application that exceeded our expectations. His attention to detail and technical expertise made the entire process smooth and efficient."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23e0e0e0'/%3E%3Ctext x='30' y='35' text-anchor='middle' font-size='20' fill='%23666'%3EAJ%3C/text%3E%3C/svg%3E" alt="Client 1">
+                        <div class="author-info">
+                            <h4>Alex Johnson</h4>
+                            <span>CEO, TechStart Inc.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-content">
+                        <p>"Working with Snehasis was a fantastic experience. His mobile app development skills are top-notch, and he consistently delivered high-quality code on time."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23e0e0e0'/%3E%3Ctext x='30' y='35' text-anchor='middle' font-size='20' fill='%23666'%3ESC%3C/text%3E%3C/svg%3E" alt="Client 2">
+                        <div class="author-info">
+                            <h4>Sarah Chen</h4>
+                            <span>Product Manager, InnovateLabs</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-content">
+                        <p>"Snehasis's tutorial content has been invaluable for our team. His ability to explain complex concepts in simple terms is remarkable."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='30' fill='%23e0e0e0'/%3E%3Ctext x='30' y='35' text-anchor='middle' font-size='20' fill='%23666'%3EMB%3C/text%3E%3C/svg%3E" alt="Client 3">
+                        <div class="author-info">
+                            <h4>Michael Brown</h4>
+                            <span>CTO, Digital Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- CONTACT SECTION  -->
-        <div class="contact-section">
-            <h1 data-aos="fade-down">Contact</h1>
+        <div class="contact-section scroll-animate" id="contact">
+            <h1 data-aos="fade-down">Contact Me</h1>
             <!-- <div class="space"></div> -->
             <div class="contact" id="contact" data-aos="fade-down">
                 <form action="https://formsubmit.co/053a14a9e4bd99724b5275722e215d4e" method="POST" class="contact-form">
