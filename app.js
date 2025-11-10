@@ -3,11 +3,27 @@ const themeToggle = document.getElementById("theme-toggle");
 const themeIcon = document.getElementById("theme-icon");
 const root = document.documentElement;
 
-// Load theme from localStorage
+// Load theme from localStorage or system preference
 const loadTheme = () => {
-  const savedTheme = localStorage.getItem("theme") || "light";
-  root.setAttribute("data-theme", savedTheme);
-  updateThemeIcon(savedTheme);
+  // Check if user has previously set a preference
+  const savedTheme = localStorage.getItem("theme");
+  
+  if (savedTheme) {
+    // Use saved preference
+    root.setAttribute("data-theme", savedTheme);
+    updateThemeIcon(savedTheme);
+  } else {
+    // Check system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const systemTheme = prefersDark ? "dark" : "light";
+    
+    // Set theme based on system preference
+    root.setAttribute("data-theme", systemTheme);
+    updateThemeIcon(systemTheme);
+    
+    // Save the system preference as the initial theme
+    localStorage.setItem("theme", systemTheme);
+  }
 };
 
 // Update theme icon
@@ -27,10 +43,21 @@ const updateThemeIcon = (theme) => {
 themeToggle?.addEventListener("click", () => {
   const currentTheme = root.getAttribute("data-theme");
   const newTheme = currentTheme === "dark" ? "light" : "dark";
-
+  
   root.setAttribute("data-theme", newTheme);
   localStorage.setItem("theme", newTheme);
   updateThemeIcon(newTheme);
+});
+
+// Listen for system theme changes
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+mediaQuery.addEventListener('change', (e) => {
+  // Only update if user hasn't manually set a preference
+  if (!localStorage.getItem("theme")) {
+    const newTheme = e.matches ? "dark" : "light";
+    root.setAttribute("data-theme", newTheme);
+    updateThemeIcon(newTheme);
+  }
 });
 
 // Initialize theme on page load
@@ -860,87 +887,3 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
-
-// Loading screen
-const createLoadingScreen = () => {
-  const loadingScreen = document.createElement('div');
-  loadingScreen.className = 'loading-screen';
-  loadingScreen.innerHTML = `
-    <div class="loading-content">
-      <div class="loading-logo">
-        <img src="https://avatars.githubusercontent.com/u/96995340" alt="Loading...">
-      </div>
-      <div class="loading-text">Loading Portfolio...</div>
-      <div class="loading-spinner"></div>
-    </div>
-  `;
-  
-  const loadingStyles = `
-    .loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--bg-body);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 0.5s ease;
-    }
-    
-    .loading-content {
-      text-align: center;
-      color: var(--text-primary);
-    }
-    
-    .loading-logo img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-      margin-bottom: 20px;
-    }
-    
-    .loading-text {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-    
-    .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid var(--border-color);
-      border-top: 4px solid var(--color-primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  `;
-  
-  const style = document.createElement('style');
-  style.textContent = loadingStyles;
-  document.head.appendChild(style);
-  
-  document.body.appendChild(loadingScreen);
-  
-  // Remove loading screen after page loads
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      loadingScreen.style.opacity = '0';
-      setTimeout(() => {
-        loadingScreen.remove();
-      }, 500);
-    }, 1000);
-  });
-};
-
-// Initialize loading screen
-createLoadingScreen();
