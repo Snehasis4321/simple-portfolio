@@ -40,9 +40,9 @@ export default function Navbar({ theme, toggleTheme }) {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-10 lg:px-16">
         <a href="#" onClick={(e) => scrollTo(e, "#")} className="group flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#5361ff] to-[#7b68ee] transition-transform duration-300 group-hover:scale-110">
+          {/* <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#5361ff] to-[#7b68ee] transition-transform duration-300 group-hover:scale-110">
             <span className="text-sm font-bold text-white">S</span>
-          </div>
+          </div> */}
           <span
             className="text-lg font-bold tracking-tight text-gray-900 dark:text-white"
             style={{ fontFamily: "var(--font-display)" }}

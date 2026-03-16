@@ -5,7 +5,8 @@ export default function Footer() {
     <footer className="border-t border-gray-100 bg-white px-6 py-8 dark:border-gray-800 dark:bg-gray-950 sm:px-10 lg:px-16">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
         <p className="text-sm text-gray-500 dark:text-gray-400 sm:text-base">
-          © {new Date().getFullYear()} Snehasis Ghosh. Built with ❤️
+          Made with ❤️ by Snehasis © {new Date().getFullYear()}
+
         </p>
         <div className="flex items-center gap-3">
           <a
