@@ -1,27 +1,30 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { skills as baseSkills, extraSkills } from "../data";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import SectionHeading from "./SectionHeading";
 
 function SkillBar({ name, level, index }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }}
-      className="group"
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ delay: index * 0.04, duration: 0.4 }}
+      className="group rounded-xl border border-gray-100 bg-white p-4 transition-all duration-300 hover:border-[#5361ff]/20 hover:shadow-md hover:shadow-[#5361ff]/[0.05] dark:border-gray-800 dark:bg-gray-900 dark:hover:border-[#5361ff]/30"
     >
-      <div className="mb-1.5 flex items-center justify-between">
-        <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">{name}</span>
-        <span className="text-xs font-medium text-[#5361ff]">{level}%</span>
+      <div className="mb-2.5 flex items-center justify-between">
+        <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{name}</span>
+        <span className="rounded-md bg-[#5361ff]/[0.08] px-2 py-0.5 text-xs font-bold tabular-nums text-[#5361ff] dark:bg-[#5361ff]/[0.15]">
+          {level}%
+        </span>
       </div>
-      <div className="h-2.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: index * 0.05 }}
+          transition={{ duration: 1, delay: 0.2 + index * 0.04, ease: [0.22, 1, 0.36, 1] }}
           className="h-full rounded-full bg-gradient-to-r from-[#5361ff] to-[#7b68ee]"
         />
       </div>
@@ -34,30 +37,32 @@ export default function Skills() {
   const allSkills = expanded ? [...baseSkills, ...extraSkills] : baseSkills;
 
   return (
-    <section id="skills" className="bg-gray-50 px-4 py-20 dark:bg-gray-900 sm:px-6">
-      <div className="mx-auto max-w-4xl">
-        <motion.h2
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl"
-        >
-          Skills
-        </motion.h2>
+    <section id="skills" className="bg-gray-50/50 px-5 py-24 dark:bg-gray-900/50 sm:py-32">
+      <div className="mx-auto max-w-5xl">
+        <SectionHeading sub="Technologies I work with daily">Skills</SectionHeading>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
-          {allSkills.map((s, i) => (
-            <SkillBar key={s.name} name={s.name} level={s.level} index={i} />
-          ))}
+        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {allSkills.map((s, i) => (
+              <SkillBar key={s.name} name={s.name} level={s.level} index={i} />
+            ))}
+          </AnimatePresence>
         </div>
 
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="mx-auto mt-8 flex items-center gap-2 rounded-lg border-2 border-[#5361ff] px-6 py-2.5 text-sm font-semibold text-[#5361ff] transition hover:bg-[#5361ff] hover:text-white"
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-8 text-center"
         >
-          {expanded ? "View Less" : "View More"}
-          {expanded ? <FiChevronUp /> : <FiChevronDown />}
-        </button>
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5361ff]/30 hover:text-[#5361ff] hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-[#5361ff]/40 dark:hover:text-[#5361ff]"
+          >
+            {expanded ? "Show Less" : "Show More"}
+            {expanded ? <FiChevronUp size={16} /> : <FiChevronDown size={16} />}
+          </button>
+        </motion.div>
       </div>
     </section>
   );

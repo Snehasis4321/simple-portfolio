@@ -1,27 +1,33 @@
 import { motion } from "framer-motion";
-import { FaQuoteLeft } from "react-icons/fa";
+import { FiStar } from "react-icons/fi";
 import { testimonials } from "../data";
+import SectionHeading from "./SectionHeading";
 
 function TestimonialCard({ t, index }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.12 }}
-      className="relative rounded-2xl border-2 border-transparent bg-white p-6 shadow-md transition hover:-translate-y-2 hover:border-[#5361ff] hover:shadow-xl dark:bg-gray-800"
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      className="group relative rounded-2xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gray-900/[0.06] dark:border-gray-800 dark:bg-gray-900 dark:hover:shadow-gray-950/30"
     >
-      <FaQuoteLeft className="absolute left-5 top-4 text-3xl text-[#5361ff]/20" />
+      {/* Stars */}
+      <div className="mb-4 flex gap-0.5">
+        {[...Array(5)].map((_, i) => (
+          <FiStar key={i} size={14} className="fill-amber-400 text-amber-400" />
+        ))}
+      </div>
 
-      <p className="mt-6 text-sm leading-relaxed text-gray-600 italic dark:text-gray-300">
+      <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
         "{t.quote}"
       </p>
 
-      <div className="mt-5 flex items-center gap-3">
+      <div className="mt-5 flex items-center gap-3 border-t border-gray-100 pt-5 dark:border-gray-800">
         <img
           src={t.image}
           alt={t.name}
-          className="h-12 w-12 rounded-full object-cover ring-2 ring-[#5361ff]/40"
+          className="h-10 w-10 rounded-full object-cover ring-2 ring-gray-100 dark:ring-gray-800"
           loading="lazy"
         />
         <div>
@@ -35,18 +41,12 @@ function TestimonialCard({ t, index }) {
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="bg-gray-50 px-4 py-20 dark:bg-gray-900 sm:px-6">
+    <section id="testimonials" className="px-5 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl"
-        >
+        <SectionHeading center sub="Feedback from people I've worked with">
           What Clients Say
-        </motion.h2>
-
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        </SectionHeading>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((t, i) => (
             <TestimonialCard key={t.name} t={t} index={i} />
           ))}

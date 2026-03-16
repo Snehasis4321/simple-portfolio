@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiMoon, FiSun } from "react-icons/fi";
 
 const links = [
@@ -12,6 +13,13 @@ const links = [
 
 export default function Navbar({ theme, toggleTheme }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const scrollTo = (e, href) => {
     e.preventDefault();
@@ -20,58 +28,95 @@ export default function Navbar({ theme, toggleTheme }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-gradient-to-r from-[#5361ff] to-[#7b68ee] shadow-lg">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <span className="text-xl font-semibold tracking-wide text-white">Portfolio</span>
+    <motion.header
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 shadow-lg shadow-gray-900/5 backdrop-blur-xl dark:bg-gray-950/80 dark:shadow-gray-950/30"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+        <a href="#" onClick={(e) => scrollTo(e, "#")} className="group flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#5361ff] to-[#7b68ee] transition-transform duration-300 group-hover:scale-110">
+            <span className="text-sm font-bold text-white">S</span>
+          </div>
+          <span
+            className="text-lg font-bold tracking-tight text-gray-900 dark:text-white"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Snehasis
+          </span>
+        </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={(e) => scrollTo(e, l.href)}
-              className="rounded-md px-3 py-1.5 text-sm font-medium uppercase tracking-wide text-white/90 transition hover:bg-white/20 hover:text-white"
+              className="relative rounded-lg px-3.5 py-2 text-[13px] font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/60 text-white transition hover:bg-white hover:text-[#5361ff]"
+            className="flex h-9 w-9 items-center justify-center rounded-xl text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-white/10 dark:hover:text-white"
           >
-            {theme === "dark" ? <FiSun size={18} /> : <FiMoon size={18} />}
+            <motion.div
+              key={theme}
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {theme === "dark" ? <FiSun size={18} /> : <FiMoon size={18} />}
+            </motion.div>
           </button>
 
           <button
             onClick={() => setOpen(!open)}
-            className="text-white md:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-xl text-gray-600 transition hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-white/10 md:hidden"
             aria-label="Toggle menu"
           >
-            {open ? <FiX size={24} /> : <FiMenu size={24} />}
+            {open ? <FiX size={20} /> : <FiMenu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile nav */}
-      {open && (
-        <nav className="flex flex-col items-center gap-4 bg-gradient-to-b from-[#5361ff] to-[#7b68ee] pb-6 pt-2 md:hidden">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={(e) => scrollTo(e, l.href)}
-              className="text-lg font-medium text-white/90 transition hover:text-white"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-      )}
-    </header>
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden border-t border-gray-100 bg-white/95 backdrop-blur-xl dark:border-gray-800 dark:bg-gray-950/95 md:hidden"
+          >
+            <div className="flex flex-col gap-1 px-5 py-4">
+              {links.map((l, i) => (
+                <motion.a
+                  key={l.href}
+                  href={l.href}
+                  onClick={(e) => scrollTo(e, l.href)}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.04 }}
+                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-white/5"
+                >
+                  {l.label}
+                </motion.a>
+              ))}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }
