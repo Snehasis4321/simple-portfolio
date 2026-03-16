@@ -19,9 +19,9 @@ const ALL_ICONS = [
 
 // 3 fixed anchor positions relative to the avatar center
 const SLOTS = [
-  { x: -110, y: -80  }, // top-left
-  { x:  115, y: -60  }, // top-right
-  { x:   90, y:  100 }, // bottom-right
+  { x: -145, y: -110 }, // top-left
+  { x:  140, y:  -80 }, // top-right
+  { x:  120, y:  130 }, // bottom-right
 ];
 
 // gentle float offsets per slot so they don't all move in sync
@@ -81,11 +81,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden px-5">
+    <section className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden px-6 sm:px-10 lg:px-16">
       <div className="pointer-events-none absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-[#5361ff]/[0.08] blur-[100px] dark:bg-[#5361ff]/[0.15]" />
       <div className="pointer-events-none absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-[#7b68ee]/[0.06] blur-[100px] dark:bg-[#7b68ee]/[0.12]" />
 
-      <div className="relative mx-auto flex w-full max-w-6xl flex-col-reverse items-center gap-12 py-16 lg:flex-row lg:justify-between lg:gap-16 lg:py-0">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col-reverse items-center gap-12 py-16 lg:flex-row lg:justify-between lg:gap-20 lg:py-0">
 
         {/* ── Text column ── */}
         <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-xl text-center lg:text-left">
@@ -97,7 +97,7 @@ export default function Hero() {
             Available for freelance work
           </motion.div>
 
-          <motion.h1 variants={fadeUp} className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl" style={{ fontFamily: "var(--font-display)" }}>
+          <motion.h1 variants={fadeUp} className="text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-6xl lg:text-7xl" style={{ fontFamily: "var(--font-display)" }}>
             Hi, I'm{" "}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-[#5361ff] to-[#7b68ee] bg-clip-text text-transparent">Snehasis</span>
@@ -108,22 +108,22 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          <motion.p variants={fadeUp} className="mt-5 h-8 text-lg font-medium text-gray-600 dark:text-gray-300 sm:text-xl">
+          <motion.p variants={fadeUp} className="mt-5 h-9 text-xl font-medium text-gray-600 dark:text-gray-300 sm:text-2xl">
             {typed}
             <span className="ml-0.5 inline-block w-[2px] animate-pulse bg-[#5361ff] align-middle" style={{ height: "1.2em" }} />
           </motion.p>
 
-          <motion.p variants={fadeUp} className="mt-5 max-w-md text-base leading-relaxed text-gray-500 dark:text-gray-400">
+          <motion.p variants={fadeUp} className="mt-5 max-w-lg text-lg leading-relaxed text-gray-500 dark:text-gray-400">
             Building innovative digital products and helping beginners learn through tutorials.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
             <a href="https://github.com/Snehasis4321" target="_blank" rel="noopener noreferrer"
-              className="group flex items-center gap-2.5 rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-gray-900/20 dark:bg-white dark:text-gray-900">
+              className="group flex items-center gap-2.5 rounded-xl bg-gray-900 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-gray-900/20 dark:bg-white dark:text-gray-900">
               <FaGithub size={18} className="transition-transform duration-300 group-hover:rotate-12" /> Github
             </a>
             <a href="https://www.youtube.com/@Snehasis4321" target="_blank" rel="noopener noreferrer"
-              className="group flex items-center gap-2.5 rounded-xl border-2 border-gray-200 bg-white px-5 py-3 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:text-red-600 hover:shadow-xl hover:shadow-red-500/10 dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-red-500/40 dark:hover:text-red-400">
+              className="group flex items-center gap-2.5 rounded-xl border-2 border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:text-red-600 hover:shadow-xl hover:shadow-red-500/10 dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-red-500/40 dark:hover:text-red-400">
               <FaYoutube size={18} className="transition-transform duration-300 group-hover:scale-110" /> Youtube
             </a>
           </motion.div>
@@ -135,7 +135,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="relative flex items-center justify-center"
-          style={{ width: 300, height: 300 }}
+          style={{ width: 420, height: 420 }}
         >
           {/* Soft glow */}
           <div className="absolute inset-[10%] rounded-full bg-gradient-to-br from-[#5361ff]/20 to-[#7b68ee]/20 blur-2xl dark:from-[#5361ff]/30 dark:to-[#7b68ee]/30" />
@@ -144,7 +144,7 @@ export default function Hero() {
           <img
             src="https://avatars.githubusercontent.com/u/96995340"
             alt="Snehasis Ghosh"
-            className="relative z-[2] h-52 w-52 rounded-full object-cover shadow-2xl shadow-[#5361ff]/15 ring-4 ring-white dark:ring-gray-800 sm:h-60 sm:w-60"
+            className="relative z-[2] h-72 w-72 rounded-full object-cover shadow-2xl shadow-[#5361ff]/15 ring-4 ring-white dark:ring-gray-800 sm:h-80 sm:w-80 lg:h-[340px] lg:w-[340px]"
             loading="eager"
           />
 

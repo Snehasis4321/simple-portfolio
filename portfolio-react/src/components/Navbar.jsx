@@ -38,7 +38,7 @@ export default function Navbar({ theme, toggleTheme }) {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-10 lg:px-16">
         <a href="#" onClick={(e) => scrollTo(e, "#")} className="group flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#5361ff] to-[#7b68ee] transition-transform duration-300 group-hover:scale-110">
             <span className="text-sm font-bold text-white">S</span>
@@ -57,7 +57,7 @@ export default function Navbar({ theme, toggleTheme }) {
               key={l.href}
               href={l.href}
               onClick={(e) => scrollTo(e, l.href)}
-              className="relative rounded-lg px-3.5 py-2 text-[13px] font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+              className="relative rounded-lg px-3.5 py-2 text-sm font-medium text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             >
               {l.label}
             </a>
@@ -108,7 +108,7 @@ export default function Navbar({ theme, toggleTheme }) {
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.04 }}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-white/5"
+                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-white/5 sm:text-base"
                 >
                   {l.label}
                 </motion.a>

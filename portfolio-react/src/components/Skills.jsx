@@ -14,8 +14,8 @@ function SkillBar({ name, level, index }) {
       className="group rounded-xl border border-gray-100 bg-white p-4 transition-all duration-300 hover:border-[#5361ff]/20 hover:shadow-md hover:shadow-[#5361ff]/[0.05] dark:border-gray-800 dark:bg-gray-900 dark:hover:border-[#5361ff]/30"
     >
       <div className="mb-2.5 flex items-center justify-between">
-        <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{name}</span>
-        <span className="rounded-md bg-[#5361ff]/[0.08] px-2 py-0.5 text-xs font-bold tabular-nums text-[#5361ff] dark:bg-[#5361ff]/[0.15]">
+        <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 sm:text-base">{name}</span>
+        <span className="rounded-md bg-[#5361ff]/[0.08] px-2 py-0.5 text-xs font-bold tabular-nums text-[#5361ff] dark:bg-[#5361ff]/[0.15] sm:text-sm">
           {level}%
         </span>
       </div>
@@ -37,8 +37,8 @@ export default function Skills() {
   const allSkills = expanded ? [...baseSkills, ...extraSkills] : baseSkills;
 
   return (
-    <section id="skills" className="bg-gray-50/50 px-5 py-24 dark:bg-gray-900/50 sm:py-32">
-      <div className="mx-auto max-w-5xl">
+    <section id="skills" className="bg-gray-50/50 px-6 py-24 dark:bg-gray-900/50 sm:px-10 sm:py-32 lg:px-16">
+      <div className="mx-auto max-w-7xl">
         <SectionHeading sub="Technologies I work with daily">Skills</SectionHeading>
 
         <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -57,7 +57,7 @@ export default function Skills() {
         >
           <button
             onClick={() => setExpanded(!expanded)}
-            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5361ff]/30 hover:text-[#5361ff] hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-[#5361ff]/40 dark:hover:text-[#5361ff]"
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5361ff]/30 hover:text-[#5361ff] hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-[#5361ff]/40 dark:hover:text-[#5361ff] sm:text-base sm:px-6 sm:py-3"
           >
             {expanded ? "Show Less" : "Show More"}
             {expanded ? <FiChevronUp size={16} /> : <FiChevronDown size={16} />}

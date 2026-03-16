@@ -19,7 +19,7 @@ export default function SectionHeading({ children, sub, center }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-3 text-base text-gray-500 dark:text-gray-400 sm:text-lg"
+          className="mt-3 text-base text-gray-500 dark:text-gray-400 sm:text-lg lg:text-xl"
         >
           {sub}
         </motion.p>

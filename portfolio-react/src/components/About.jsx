@@ -11,11 +11,11 @@ const highlights = [
 
 export default function About() {
   return (
-    <section id="about" className="relative overflow-hidden px-5 py-24 sm:py-32">
+    <section id="about" className="relative overflow-hidden px-6 py-24 sm:px-10 sm:py-32 lg:px-16">
       {/* Background accent */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#5361ff]/[0.03] to-transparent dark:from-[#5361ff]/[0.06]" />
 
-      <div className="relative mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-7xl">
         <div className="grid gap-16 lg:grid-cols-[1fr,1.2fr] lg:items-center">
           {/* Left — text */}
           <div>
@@ -25,7 +25,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: 0.15, duration: 0.5 }}
-              className="mt-6 text-base leading-relaxed text-gray-600 dark:text-gray-400 sm:text-lg"
+              className="mt-6 text-base leading-relaxed text-gray-600 dark:text-gray-400 sm:text-lg lg:text-xl"
             >
               I'm a freelance web & mobile developer from India who loves turning ideas into polished digital products.
               I specialize in full-stack JavaScript, Flutter, and cloud infrastructure.
@@ -47,8 +47,8 @@ export default function About() {
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#5361ff]/[0.08] text-[#5361ff] transition-colors group-hover:bg-[#5361ff] group-hover:text-white dark:bg-[#5361ff]/[0.15]">
                   <h.icon size={20} />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{h.label}</h3>
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{h.desc}</p>
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white sm:text-base">{h.label}</h3>
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 sm:text-sm">{h.desc}</p>
               </motion.div>
             ))}
           </div>

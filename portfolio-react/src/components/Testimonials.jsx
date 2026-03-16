@@ -19,7 +19,7 @@ function TestimonialCard({ t, index }) {
         ))}
       </div>
 
-      <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+      <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400 sm:text-base lg:text-lg">
         "{t.quote}"
       </p>
 
@@ -27,12 +27,12 @@ function TestimonialCard({ t, index }) {
         <img
           src={t.image}
           alt={t.name}
-          className="h-10 w-10 rounded-full object-cover ring-2 ring-gray-100 dark:ring-gray-800"
+          className="h-10 w-10 rounded-full object-cover ring-2 ring-gray-100 dark:ring-gray-800 sm:h-12 sm:w-12"
           loading="lazy"
         />
         <div>
-          <h4 className="text-sm font-semibold text-gray-900 dark:text-white">{t.name}</h4>
-          <span className="text-xs text-gray-500 dark:text-gray-400">{t.role}</span>
+          <h4 className="text-sm font-semibold text-gray-900 dark:text-white sm:text-base">{t.name}</h4>
+          <span className="text-xs text-gray-500 dark:text-gray-400 sm:text-sm">{t.role}</span>
         </div>
       </div>
     </motion.div>
@@ -41,8 +41,8 @@ function TestimonialCard({ t, index }) {
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="px-5 py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl">
+    <section id="testimonials" className="px-6 py-24 sm:px-10 sm:py-32 lg:px-16">
+      <div className="mx-auto max-w-7xl">
         <SectionHeading center sub="Feedback from people I've worked with">
           What Clients Say
         </SectionHeading>

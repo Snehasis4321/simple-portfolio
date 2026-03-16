@@ -24,12 +24,12 @@ function CertCard({ cert, index }) {
           <Icon />
         </div>
         <div className="min-w-0">
-          <h3 className="text-[15px] font-semibold leading-snug text-gray-900 dark:text-white">{cert.name}</h3>
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{cert.issuer}</p>
+          <h3 className="text-base font-semibold leading-snug text-gray-900 dark:text-white sm:text-lg">{cert.name}</h3>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{cert.issuer}</p>
         </div>
       </div>
 
-      <div className="mt-4 flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500">
+      <div className="mt-4 flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500 sm:text-sm">
         <span className="flex items-center gap-1.5"><FaCalendar className="text-[#5361ff]/60" />{cert.date}</span>
         <span className="flex items-center gap-1.5"><FaFingerprint className="text-[#5361ff]/60" />{cert.exam}</span>
       </div>
@@ -39,7 +39,7 @@ function CertCard({ cert, index }) {
           href={cert.verifyLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 rounded-lg bg-[#5361ff] px-3.5 py-2 text-xs font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4350ee] hover:shadow-md hover:shadow-[#5361ff]/20"
+          className="flex items-center gap-1.5 rounded-lg bg-[#5361ff] px-3.5 py-2 text-xs font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4350ee] hover:shadow-md hover:shadow-[#5361ff]/20 sm:px-4 sm:py-2.5 sm:text-sm"
         >
           <FaShieldAlt size={12} /> Verify
         </a>
@@ -47,7 +47,7 @@ function CertCard({ cert, index }) {
           href={cert.verifyLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-xs font-medium text-gray-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5361ff]/30 hover:text-[#5361ff] dark:border-gray-700 dark:text-gray-400 dark:hover:border-[#5361ff]/40 dark:hover:text-[#5361ff]"
+          className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-xs font-medium text-gray-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5361ff]/30 hover:text-[#5361ff] dark:border-gray-700 dark:text-gray-400 dark:hover:border-[#5361ff]/40 dark:hover:text-[#5361ff] sm:px-4 sm:py-2.5 sm:text-sm"
         >
           <FaExternalLinkAlt size={10} /> Credential
         </a>
@@ -58,8 +58,8 @@ function CertCard({ cert, index }) {
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="px-5 py-24 sm:py-32">
-      <div className="mx-auto max-w-6xl">
+    <section id="certifications" className="px-6 py-24 sm:px-10 sm:py-32 lg:px-16">
+      <div className="mx-auto max-w-7xl">
         <SectionHeading sub="Professional credentials and achievements">Certifications</SectionHeading>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {certifications.map((cert, i) => (

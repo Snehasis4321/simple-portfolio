@@ -48,11 +48,11 @@ function ProjectModal({ project, onClose }) {
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white" style={{ fontFamily: "var(--font-display)" }}>
             {project.name}
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{project.description}</p>
+          <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400 sm:text-base">{project.description}</p>
 
           <div className="mt-5 flex flex-wrap gap-1.5">
             {project.techStack.map((t) => (
-              <span key={t} className="rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+              <span key={t} className="rounded-md bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 sm:text-sm">
                 {t}
               </span>
             ))}
@@ -84,8 +84,8 @@ export default function Projects() {
   const [selected, setSelected] = useState(null);
 
   return (
-    <section id="projects" className="bg-gray-50/50 px-5 py-24 dark:bg-gray-900/50 sm:py-32">
-      <div className="mx-auto max-w-6xl">
+    <section id="projects" className="bg-gray-50/50 px-6 py-24 dark:bg-gray-900/50 sm:px-10 sm:py-32 lg:px-16">
+      <div className="mx-auto max-w-7xl">
         <SectionHeading sub="A selection of things I've built">Projects</SectionHeading>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -113,17 +113,17 @@ export default function Projects() {
               </div>
               <div className="p-5">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-[15px] font-semibold text-gray-900 dark:text-white">{p.name}</h3>
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white sm:text-lg">{p.name}</h3>
                   <FiArrowUpRight className="text-gray-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#5361ff]" size={16} />
                 </div>
                 <div className="mt-2.5 flex flex-wrap gap-1.5">
                   {p.techStack.slice(0, 3).map((t) => (
-                    <span key={t} className="rounded-md bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-500 dark:bg-gray-800 dark:text-gray-400">
+                    <span key={t} className="rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-800 dark:text-gray-400 sm:text-sm">
                       {t}
                     </span>
                   ))}
                   {p.techStack.length > 3 && (
-                    <span className="rounded-md bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-400 dark:bg-gray-800">
+                    <span className="rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-400 dark:bg-gray-800 sm:text-sm">
                       +{p.techStack.length - 3}
                     </span>
                   )}
