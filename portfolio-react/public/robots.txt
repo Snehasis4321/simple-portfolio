@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.snehasisghosh.com/sitemap.xml
+Sitemap: https://snehasisghosh.com/sitemap.xml

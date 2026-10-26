@@ -142,7 +142,7 @@ export default function Hero() {
 
           {/* Avatar */}
           <img
-            src="https://avatars.githubusercontent.com/u/96995340"
+            src="/web/github_profile.png"
             alt="Snehasis Ghosh"
             className="relative z-[2] h-72 w-72 rounded-full object-cover shadow-2xl shadow-[#5361ff]/15 ring-4 ring-white dark:ring-gray-800 sm:h-80 sm:w-80 lg:h-[340px] lg:w-[340px]"
             loading="eager"
