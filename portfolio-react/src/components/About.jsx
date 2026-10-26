@@ -27,9 +27,9 @@ export default function About() {
               transition={{ delay: 0.15, duration: 0.5 }}
               className="mt-6 text-base leading-relaxed text-gray-600 dark:text-gray-400 sm:text-lg lg:text-xl"
             >
-              I'm a freelance web & mobile developer from India who loves turning ideas into polished digital products.
+              I’m a freelance web & mobile developer from India who loves turning ideas into polished digital products.
               I specialize in full-stack JavaScript, Flutter, and cloud infrastructure.
-              When I'm not coding, I create tutorials to help beginners start their programming journey.
+              When I’m not coding, I create tutorials to help beginners start their programming journey.
             </motion.p>
           </div>
 
@@ -45,7 +45,7 @@ export default function About() {
                 className="group rounded-2xl border border-gray-100 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#5361ff]/20 hover:shadow-lg hover:shadow-[#5361ff]/[0.06] dark:border-gray-800 dark:bg-gray-900 dark:hover:border-[#5361ff]/30"
               >
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#5361ff]/[0.08] text-[#5361ff] transition-colors group-hover:bg-[#5361ff] group-hover:text-white dark:bg-[#5361ff]/[0.15]">
-                  <h.icon size={20} />
+                  <h.icon size={20} aria-hidden="true" />
                 </div>
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-white sm:text-base">{h.label}</h3>
                 <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 sm:text-sm">{h.desc}</p>

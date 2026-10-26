@@ -7,8 +7,12 @@ export default function CursorGlow() {
     const el = glowRef.current;
     if (!el) return;
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     let x = -200, y = -200;
     let tx = -200, ty = -200;
+    let rafId = null;
 
     const onMove = (e) => { tx = e.clientX; ty = e.clientY; };
     const onLeave = () => { tx = -200; ty = -200; };
@@ -17,14 +21,15 @@ export default function CursorGlow() {
       x += (tx - x) * 0.15;
       y += (ty - y) * 0.15;
       el.style.transform = `translate(${x - 200}px, ${y - 200}px)`;
-      requestAnimationFrame(tick);
+      rafId = requestAnimationFrame(tick);
     };
 
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseleave", onLeave);
-    tick();
+    rafId = requestAnimationFrame(tick);
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseleave", onLeave);
     };

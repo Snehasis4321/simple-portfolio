@@ -30,22 +30,25 @@ function ProjectModal({ project, onClose }) {
         exit={{ scale: 0.92, opacity: 0, y: 20 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
         className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-gray-200 bg-white p-0 shadow-2xl dark:border-gray-800 dark:bg-gray-900"
       >
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-gray-500 backdrop-blur-sm transition hover:bg-gray-100 hover:text-gray-900 dark:bg-gray-800/80 dark:hover:bg-gray-700"
-          aria-label="Close"
+          className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 text-gray-500 backdrop-blur-sm transition hover:bg-gray-100 hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-[#5361ff] focus-visible:outline-hidden dark:bg-gray-800/80 dark:hover:bg-gray-700"
+          aria-label="Close project modal"
         >
-          <FiX size={16} />
+          <FiX size={16} aria-hidden="true" />
         </button>
 
         <div className="aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
-          <img src={project.thumbnail} alt={project.name} className="h-full w-full object-cover" />
+          <img src={project.thumbnail} alt={project.name} width={640} height={360} className="h-full w-full object-cover" />
         </div>
 
         <div className="p-6 sm:p-8">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white" style={{ fontFamily: "var(--font-display)" }}>
+          <h3 id="project-modal-title" className="text-2xl font-bold text-gray-900 dark:text-white" style={{ fontFamily: "var(--font-display)" }}>
             {project.name}
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400 sm:text-base">{project.description}</p>
@@ -63,13 +66,14 @@ function ProjectModal({ project, onClose }) {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-xl bg-[#5361ff] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4350ee] hover:shadow-lg hover:shadow-[#5361ff]/20"
+              aria-label={`Visit ${project.name} (opens in new tab)`}
+              className="flex items-center gap-2 rounded-xl bg-[#5361ff] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4350ee] hover:shadow-lg hover:shadow-[#5361ff]/20 focus-visible:ring-2 focus-visible:ring-[#5361ff] focus-visible:ring-offset-2 focus-visible:outline-hidden"
             >
-              <FiExternalLink size={15} /> Visit Project
+              <FiExternalLink size={15} aria-hidden="true" /> Visit Project
             </a>
             <button
               onClick={onClose}
-              className="rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
+              className="rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-[#5361ff] focus-visible:ring-offset-2 focus-visible:outline-hidden dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
             >
               Close
             </button>
@@ -86,7 +90,7 @@ export default function Projects() {
   return (
     <section id="projects" className="bg-gray-50/50 px-6 py-24 dark:bg-gray-900/50 sm:px-10 sm:py-32 lg:px-16">
       <div className="mx-auto max-w-7xl">
-        <SectionHeading sub="A selection of things I've built">Projects</SectionHeading>
+        <SectionHeading sub="A selection of things I’ve built">Projects</SectionHeading>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p, i) => (
@@ -96,46 +100,49 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: i * 0.07, duration: 0.5 }}
-              onClick={() => setSelected(p)}
-              onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setSelected(p)}
-              role="button"
-              tabIndex={0}
-              aria-label={`View ${p.name}`}
-              className="group relative cursor-pointer overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gray-900/[0.06] dark:border-gray-800 dark:bg-gray-900 dark:hover:shadow-gray-950/30"
             >
-              <div className="aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img
-                  src={p.thumbnail}
-                  alt={p.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-5">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base font-semibold text-gray-900 dark:text-white sm:text-lg">{p.name}</h3>
-                  <FiArrowUpRight className="text-gray-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#5361ff]" size={16} />
+              <button
+                type="button"
+                onClick={() => setSelected(p)}
+                aria-label={`View details for ${p.name}`}
+                className="group relative w-full cursor-pointer overflow-hidden rounded-2xl border border-gray-100 bg-white text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gray-900/[0.06] focus-visible:ring-2 focus-visible:ring-[#5361ff] focus-visible:ring-offset-2 focus-visible:outline-hidden dark:border-gray-800 dark:bg-gray-900 dark:hover:shadow-gray-950/30"
+              >
+                <div className="aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  <img
+                    src={p.thumbnail}
+                    alt={p.name}
+                    width={640}
+                    height={400}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
                 </div>
-                <div className="mt-2.5 flex flex-wrap gap-1.5">
-                  {p.techStack.slice(0, 3).map((t) => (
-                    <span key={t} className="rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-800 dark:text-gray-400 sm:text-sm">
-                      {t}
-                    </span>
-                  ))}
-                  {p.techStack.length > 3 && (
-                    <span className="rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-400 dark:bg-gray-800 sm:text-sm">
-                      +{p.techStack.length - 3}
-                    </span>
-                  )}
+                <div className="p-5">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-base font-semibold text-gray-900 dark:text-white sm:text-lg">{p.name}</h3>
+                    <FiArrowUpRight aria-hidden="true" className="text-gray-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#5361ff]" size={16} />
+                  </div>
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
+                    {p.techStack.slice(0, 3).map((t) => (
+                      <span key={t} className="rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-500 dark:bg-gray-800 dark:text-gray-400 sm:text-sm">
+                        {t}
+                      </span>
+                    ))}
+                    {p.techStack.length > 3 && (
+                      <span className="rounded-md bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-400 dark:bg-gray-800 sm:text-sm">
+                        +{p.techStack.length - 3}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </button>
             </motion.div>
           ))}
         </div>
       </div>
 
       <AnimatePresence>
-        {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+        {selected ? <ProjectModal project={selected} onClose={() => setSelected(null)} /> : null}
       </AnimatePresence>
     </section>
   );

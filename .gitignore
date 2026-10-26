@@ -3,3 +3,5 @@
 .vscode
 *.cpp
 /.kiro
+portfolio-react/node_modules/
+/.agents

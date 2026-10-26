@@ -56,11 +56,12 @@ export default function Skills() {
           className="mt-8 text-center"
         >
           <button
-            onClick={() => setExpanded(!expanded)}
-            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5361ff]/30 hover:text-[#5361ff] hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-[#5361ff]/40 dark:hover:text-[#5361ff] sm:text-base sm:px-6 sm:py-3"
+            onClick={() => setExpanded((prev) => !prev)}
+            aria-expanded={expanded}
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5361ff]/30 hover:text-[#5361ff] hover:shadow-md focus-visible:ring-2 focus-visible:ring-[#5361ff] focus-visible:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-[#5361ff]/40 dark:hover:text-[#5361ff] sm:px-6 sm:py-3 sm:text-base"
           >
             {expanded ? "Show Less" : "Show More"}
-            {expanded ? <FiChevronUp size={16} /> : <FiChevronDown size={16} />}
+            {expanded ? <FiChevronUp size={16} aria-hidden="true" /> : <FiChevronDown size={16} aria-hidden="true" />}
           </button>
         </motion.div>
       </div>

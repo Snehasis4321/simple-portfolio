@@ -21,7 +21,7 @@ function CertCard({ cert, index }) {
 
       <div className="flex items-start gap-4">
         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#5361ff]/10 to-[#7b68ee]/10 text-xl text-[#5361ff] transition-all duration-300 group-hover:from-[#5361ff] group-hover:to-[#7b68ee] group-hover:text-white dark:from-[#5361ff]/20 dark:to-[#7b68ee]/20">
-          <Icon />
+          <Icon aria-hidden="true" />
         </div>
         <div className="min-w-0">
           <h3 className="text-base font-semibold leading-snug text-gray-900 dark:text-white sm:text-lg">{cert.name}</h3>
@@ -30,8 +30,8 @@ function CertCard({ cert, index }) {
       </div>
 
       <div className="mt-4 flex items-center gap-4 text-xs text-gray-400 dark:text-gray-500 sm:text-sm">
-        <span className="flex items-center gap-1.5"><FaCalendar className="text-[#5361ff]/60" />{cert.date}</span>
-        <span className="flex items-center gap-1.5"><FaFingerprint className="text-[#5361ff]/60" />{cert.exam}</span>
+        <span className="flex items-center gap-1.5"><FaCalendar className="text-[#5361ff]/60" aria-hidden="true" />{cert.date}</span>
+        <span className="flex items-center gap-1.5"><FaFingerprint className="text-[#5361ff]/60" aria-hidden="true" />{cert.exam}</span>
       </div>
 
       <div className="mt-5 flex gap-2">
@@ -39,17 +39,19 @@ function CertCard({ cert, index }) {
           href={cert.verifyLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 rounded-lg bg-[#5361ff] px-3.5 py-2 text-xs font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4350ee] hover:shadow-md hover:shadow-[#5361ff]/20 sm:px-4 sm:py-2.5 sm:text-sm"
+          aria-label={`Verify ${cert.name} credential (opens in new tab)`}
+          className="flex items-center gap-1.5 rounded-lg bg-[#5361ff] px-3.5 py-2 text-xs font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4350ee] hover:shadow-md hover:shadow-[#5361ff]/20 focus-visible:ring-2 focus-visible:ring-[#5361ff] focus-visible:ring-offset-2 focus-visible:outline-hidden sm:px-4 sm:py-2.5 sm:text-sm"
         >
-          <FaShieldAlt size={12} /> Verify
+          <FaShieldAlt size={12} aria-hidden="true" /> Verify
         </a>
         <a
           href={cert.verifyLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-xs font-medium text-gray-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5361ff]/30 hover:text-[#5361ff] dark:border-gray-700 dark:text-gray-400 dark:hover:border-[#5361ff]/40 dark:hover:text-[#5361ff] sm:px-4 sm:py-2.5 sm:text-sm"
+          aria-label={`View ${cert.name} credential details (opens in new tab)`}
+          className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-xs font-medium text-gray-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#5361ff]/30 hover:text-[#5361ff] focus-visible:ring-2 focus-visible:ring-[#5361ff] focus-visible:ring-offset-2 focus-visible:outline-hidden dark:border-gray-700 dark:text-gray-400 dark:hover:border-[#5361ff]/40 dark:hover:text-[#5361ff] sm:px-4 sm:py-2.5 sm:text-sm"
         >
-          <FaExternalLinkAlt size={10} /> Credential
+          <FaExternalLinkAlt size={10} aria-hidden="true" /> Credential
         </a>
       </div>
     </motion.div>

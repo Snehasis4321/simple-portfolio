@@ -12,8 +12,10 @@ export function useTypingEffect(words, typingSpeed = 100, deletingSpeed = 50, pa
     if (!isDeleting && text === current) {
       timeout = setTimeout(() => setIsDeleting(true), pauseTime);
     } else if (isDeleting && text === "") {
-      setIsDeleting(false);
-      setWordIndex((prev) => (prev + 1) % words.length);
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % words.length);
+      }, typingSpeed);
     } else {
       timeout = setTimeout(() => {
         setText(current.substring(0, text.length + (isDeleting ? -1 : 1)));

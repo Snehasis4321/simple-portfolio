@@ -37,7 +37,7 @@ const fadeUp  = {
   show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
-function TechBadge({ icon, float }) {
+function TechBadge({ icon }) {
   const { Icon, color, label } = icon;
   return (
     <motion.div
@@ -59,13 +59,11 @@ export default function Hero() {
 
   // track which icon index is shown in each slot
   const [slotIndices, setSlotIndices] = useState([0, 1, 2]);
-  const [swappingSlot, setSwappingSlot] = useState(null);
 
   useEffect(() => {
     // every 2.5s pick a random slot and advance its icon
     const id = setInterval(() => {
       const slot = Math.floor(Math.random() * SLOTS.length);
-      setSwappingSlot(slot);
       setSlotIndices((prev) => {
         const next = [...prev];
         // find next icon not currently visible
@@ -75,7 +73,6 @@ export default function Hero() {
         next[slot] = candidate;
         return next;
       });
-      setTimeout(() => setSwappingSlot(null), 400);
     }, 2500);
     return () => clearInterval(id);
   }, []);
@@ -98,7 +95,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1 variants={fadeUp} className="text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-6xl lg:text-7xl" style={{ fontFamily: "var(--font-display)" }}>
-            Hi, I'm{" "}
+            Hi, I’m{" "}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-[#5361ff] to-[#7b68ee] bg-clip-text text-transparent">Snehasis</span>
               <motion.span className="absolute -bottom-1 left-0 h-3 w-full rounded-sm bg-[#5361ff]/10 dark:bg-[#5361ff]/20"
@@ -119,12 +116,12 @@ export default function Hero() {
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
             <a href="https://github.com/Snehasis4321" target="_blank" rel="noopener noreferrer"
-              className="group flex items-center gap-2.5 rounded-xl bg-gray-900 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-gray-900/20 dark:bg-white dark:text-gray-900">
-              <FaGithub size={18} className="transition-transform duration-300 group-hover:rotate-12" /> Github
+              className="group flex items-center gap-2.5 rounded-xl bg-gray-900 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-gray-900/20 focus-visible:ring-2 focus-visible:ring-[#5361ff] focus-visible:ring-offset-2 focus-visible:outline-hidden dark:bg-white dark:text-gray-900">
+              <FaGithub size={18} aria-hidden="true" className="transition-transform duration-300 group-hover:rotate-12" /> GitHub
             </a>
             <a href="https://www.youtube.com/@Snehasis4321" target="_blank" rel="noopener noreferrer"
-              className="group flex items-center gap-2.5 rounded-xl border-2 border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:text-red-600 hover:shadow-xl hover:shadow-red-500/10 dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-red-500/40 dark:hover:text-red-400">
-              <FaYoutube size={18} className="transition-transform duration-300 group-hover:scale-110" /> Youtube
+              className="group flex items-center gap-2.5 rounded-xl border-2 border-gray-200 bg-white px-6 py-3.5 text-sm font-semibold text-gray-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:text-red-600 hover:shadow-xl hover:shadow-red-500/10 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:outline-hidden dark:border-gray-700 dark:bg-transparent dark:text-gray-300 dark:hover:border-red-500/40 dark:hover:text-red-400">
+              <FaYoutube size={18} aria-hidden="true" className="transition-transform duration-300 group-hover:scale-110" /> YouTube
             </a>
           </motion.div>
         </motion.div>
@@ -144,6 +141,9 @@ export default function Hero() {
           <img
             src="/web/github_profile.png"
             alt="Snehasis Ghosh"
+            width={340}
+            height={340}
+            fetchPriority="high"
             className="relative z-[2] h-72 w-72 rounded-full object-cover shadow-2xl shadow-[#5361ff]/15 ring-4 ring-white dark:ring-gray-800 sm:h-80 sm:w-80 lg:h-[340px] lg:w-[340px]"
             loading="eager"
           />
@@ -161,7 +161,6 @@ export default function Hero() {
                 <TechBadge
                   key={ALL_ICONS[slotIndices[slotIdx]].label}
                   icon={ALL_ICONS[slotIndices[slotIdx]]}
-                  float={FLOATS[slotIdx]}
                 />
               </AnimatePresence>
             </motion.div>
@@ -173,7 +172,7 @@ export default function Hero() {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
-          <FiArrowDown className="text-gray-400 dark:text-gray-500" size={20} />
+          <FiArrowDown className="text-gray-400 dark:text-gray-500" size={20} aria-hidden="true" />
         </motion.div>
       </motion.div>
     </section>

@@ -27,8 +27,15 @@ export function useTheme() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  const toggle = () =>
-    setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const toggle = () => {
+    if (typeof document !== "undefined" && "startViewTransition" in document) {
+      document.startViewTransition(() => {
+        setTheme((t) => (t === "dark" ? "light" : "dark"));
+      });
+    } else {
+      setTheme((t) => (t === "dark" ? "light" : "dark"));
+    }
+  };
 
   // Let user reset to system preference
   const resetToSystem = () => {

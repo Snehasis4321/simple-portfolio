@@ -13,19 +13,19 @@ export default function Footer() {
             href="https://github.com/Snehasis4321"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-white/10 dark:hover:text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-700 focus-visible:ring-2 focus-visible:ring-[#5361ff] focus-visible:outline-hidden dark:hover:bg-white/10 dark:hover:text-white"
             aria-label="GitHub"
           >
-            <FaGithub size={16} />
+            <FaGithub size={16} aria-hidden="true" />
           </a>
           <a
             href="https://www.youtube.com/@Snehasis4321"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-red-500 dark:hover:bg-white/10 dark:hover:text-red-400"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-red-500 focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:outline-hidden dark:hover:bg-white/10 dark:hover:text-red-400"
             aria-label="YouTube"
           >
-            <FaYoutube size={16} />
+            <FaYoutube size={16} aria-hidden="true" />
           </a>
         </div>
       </div>

@@ -87,14 +87,20 @@ export default function ParticleField() {
           }
         }
       }
-      raf.current = requestAnimationFrame(draw);
+      if (!prefersReducedMotion) {
+        raf.current = requestAnimationFrame(draw);
+      }
     };
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     resize();
     draw();
-    window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", onMouse);
-    window.addEventListener("mouseleave", onLeave);
+    if (!prefersReducedMotion) {
+      window.addEventListener("resize", resize, { passive: true });
+      window.addEventListener("mousemove", onMouse, { passive: true });
+      window.addEventListener("mouseleave", onLeave);
+    }
 
     return () => {
       cancelAnimationFrame(raf.current);
